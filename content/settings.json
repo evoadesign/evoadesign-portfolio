@@ -9,5 +9,15 @@
   "contactEmail": "vitor.belluco@evoadesign.com.br",
   "contactWhatsapp": "+55 (19) 99857-1988",
   "footerCnpj": "48.909.461/0001-08",
-  "footerRazaoSocial": "EVOA DESIGN STUDIO LTDA"
+  "footerRazaoSocial": "EVOA DESIGN STUDIO LTDA",
+  "socialLinks": [
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/evoa_design"
+    },
+    {
+      "platform": "behance",
+      "url": "https://behance.net"
+    }
+  ]
 }

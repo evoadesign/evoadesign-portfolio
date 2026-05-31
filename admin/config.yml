@@ -38,6 +38,26 @@ collections:
           - { label: "WhatsApp de Contato", name: "contactWhatsapp", widget: "string", description: "O número do WhatsApp oficial exibido no formulário de contato e linkado no chat." }
           - { label: "CNPJ da Empresa", name: "footerCnpj", widget: "string", description: "Exibido no rodapé do site." }
           - { label: "Razão Social da Empresa", name: "footerRazaoSocial", widget: "string", description: "Exibido no rodapé do site." }
+          - name: "socialLinks"
+            label: "Links de Redes Sociais (Rodapé)"
+            widget: "list"
+            summary: "{{fields.platform}} ({{fields.url}})"
+            fields:
+              - name: "platform"
+                label: "Plataforma / Ícone"
+                widget: "select"
+                options:
+                  - { label: "Instagram", value: "instagram" }
+                  - { label: "Behance", value: "behance" }
+                  - { label: "LinkedIn", value: "linkedin" }
+                  - { label: "YouTube", value: "youtube" }
+                  - { label: "Vimeo", value: "vimeo" }
+                  - { label: "WhatsApp", value: "whatsapp" }
+                description: "Selecione a rede social para carregar o ícone correspondente de forma dinâmica."
+              - name: "url"
+                label: "Link Completo (URL)"
+                widget: "string"
+                description: "O link completo, ex: https://www.instagram.com/evoa_design"
 
   # 2. Portfolio Collection (All projects inside a single JSON array for zero-build static loading)
   - name: "portfolio"
