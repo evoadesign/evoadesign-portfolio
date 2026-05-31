@@ -1,25 +1,14 @@
 {
   "items": [
     {
-      "id": "1",
-      "title": "SOVRANO Principato - Imagens de produto com Inteligência Artificial",
-      "category": "CGI & Visualização com IA",
-      "client": "SOVRANO Watches",
-      "year": "2026",
-      "tools": "Vizcom, Photoshop",
-      "description": "Estudo de renderização tridimensional de alta fidelidade e variantes estéticas dos relógios premium SOVRANO. Criamos três variantes completas (Azul, Branco e Preto) explorando materiais metálicos de luxo, reflexos de vidro de safira e acabamentos sob iluminação física complexa.",
       "shortDescription": "Estudo de renderização de alta fidelidade e variantes estéticas dos relógios SOVRANO.",
-      "thumbnail": "assets/images/SOVRANO - Visualização de Produto com IA/Azul/SOVRANO_PRINCIPATO_AZUL_7.png",
       "conceptHighlights": [
         "Mapeamento tridimensional integrado das variantes Azul, Branco e Preto com modelagem de precisão de caixa e mostrador.",
         "Estudo detalhado de refração do vidro de safira curvo e reflexos antirreflexo sob iluminação física simulada.",
         "Criação de detalhes internos do mostrador e ponteiros com modelagem microscópica para valorização da engenharia do relógio."
       ],
-      "cmfHighlights": [
-        "Aço inoxidável 316L escovado com detalhes chanfrados polidos espelhados.",
-        "Mostradores texturizados com acabamento sunburst em cores Azul, Branco e Preto.",
-        "Pulseiras premium em couro legítimo texturizado e fivelas de aço personalizadas com gravação a laser."
-      ],
+      "client": "SOVRANO Watches",
+      "thumbnail": "assets/images/SOVRANO - Visualização de Produto com IA/Azul/SOVRANO_PRINCIPATO_AZUL_7.png",
       "gallery": [
         "assets/images/SOVRANO - Visualização de Produto com IA/Azul/SOVRANO_PRINCIPATO_AZUL_7.png",
         "assets/images/SOVRANO - Visualização de Produto com IA/Azul/SOVRANO_PRINCIPATO_AZUL_1.png",
@@ -28,28 +17,28 @@
         "assets/images/SOVRANO - Visualização de Produto com IA/Branco/SOVRANO_PRINCIPATO_BRANCO_1.png",
         "assets/images/SOVRANO - Visualização de Produto com IA/Preto/SOVRANO_PRINCIPATO_PRETO_1.png",
         "assets/images/SOVRANO - Visualização de Produto com IA/Preto/SOVRANO_PRINCIPATO_PRETO_2.png"
-      ]
+      ],
+      "title": "SOVRANO Principato - Imagens de produto com Inteligência Artificial",
+      "cmfHighlights": [
+        "Aço inoxidável 316L escovado com detalhes chanfrados polidos espelhados.",
+        "Mostradores texturizados com acabamento sunburst em cores Azul, Branco e Preto.",
+        "Pulseiras premium em couro legítimo texturizado e fivelas de aço personalizadas com gravação a laser."
+      ],
+      "id": "1",
+      "tools": "Vizcom, Photoshop",
+      "description": "Estudo de renderização tridimensional de alta fidelidade e variantes estéticas dos relógios premium SOVRANO. Criamos três variantes completas (Azul, Branco e Preto) explorando materiais metálicos de luxo, reflexos de vidro de safira e acabamentos sob iluminação física complexa.",
+      "year": "2026",
+      "category": "CGI & Visualização com IA"
     },
     {
-      "id": "7",
-      "title": "Do Sentimento à Forma",
-      "category": "CGI Conceitual & Abstrato",
-      "client": "EVOA Art Gallery",
-      "year": "2026",
-      "tools": "Vizcom, Photoshop",
-      "description": "Direção de design artístico e modelagem abstrata explorando a tradução visual de sentimentos humanos complexos em formas tridimensionais físicas táteis, estudando refração de luz, simulações volumétricas de partículas e rendering conceitual avançado.",
       "shortDescription": "Direção artística explorando a tradução visual de sentimentos em formas 3D táteis.",
-      "thumbnail": "assets/images/Do Sentimento à Forma/260417-125700-Create_ultra_high_resolution_4k_cinematic_product.png",
       "conceptHighlights": [
         "Exploração tridimensional abstrata da textura de resinas transparentes.",
         "Simulações de partículas em suspensão gerando sensação de leveza ou densidade.",
         "Rendering volumétrico avançado com difração luminosa e refração tátil."
       ],
-      "cmfHighlights": [
-        "Formas em resinas e vidros orgânicos com índices de refração customizados.",
-        "Acabamentos foscos polidos com texturas ásperas internas e lisas externas.",
-        "Paleta de cores neutras e acentos de ouro líquido e bronze martelado."
-      ],
+      "client": "EVOA Art Gallery",
+      "thumbnail": "assets/images/Do Sentimento à Forma/260417-125700-Create_ultra_high_resolution_4k_cinematic_product.png",
       "gallery": [
         "assets/images/Do Sentimento à Forma/260417-125700-Create_ultra_high_resolution_4k_cinematic_product.png",
         "assets/images/Do Sentimento à Forma/260417-125734-Create_ultra_high_resolution_4k_cinematic_product.png",
@@ -61,30 +50,28 @@
         "assets/images/Do Sentimento à Forma/260417-173906-Create_ultra_high_resolution_4k_cinematic_product.png",
         "assets/images/Do Sentimento à Forma/260417-173917-Create_ultra_high_resolution_4k_cinematic_product.png",
         "assets/images/Do Sentimento à Forma/260417-173919-Create_ultra_high_resolution_4k_cinematic_product.png"
-      ]
+      ],
+      "title": "Do Sentimento à Forma",
+      "cmfHighlights": [
+        "Formas em resinas e vidros orgânicos com índices de refração customizados.",
+        "Acabamentos foscos polidos com texturas ásperas internas e lisas externas.",
+        "Paleta de cores neutras e acentos de ouro líquido e bronze martelado."
+      ],
+      "id": "7",
+      "tools": "Vizcom, Photoshop",
+      "description": "Direção de design artístico e modelagem abstrata explorando a tradução visual de sentimentos humanos complexos em formas tridimensionais físicas táteis, estudando refração de luz, simulações volumétricas de partículas e rendering conceitual avançado.",
+      "year": "2026",
+      "category": "Visualização com IA"
     },
     {
-      "id": "4",
-      "title": "Lamborghini IA Concept",
-      "category": "Direção de Arte & IA",
-      "client": "EVOA Lab Studio",
-      "year": "2026",
-      "tools": "Vizcom, After Effects, Photoshop",
-      "description": "Estudo experimental de direção de arte, modelagem conceitual e geração de animação com Inteligência Artificial integrando o carro em cenários extremos como neve, rally e drifting noturno. Uma fusão fantástica entre a sofisticação da marca e o poder das redes neurais de IA.",
       "shortDescription": "Direção de arte conceitual e geração de animação com Inteligência Artificial generativa.",
-      "thumbnail": "assets/images/Lamborghini Concept - Animação 100% IA/Create a ultra high cinematic shot of The Car, textures and surfaces, ensure The car Rolling in the snow.png",
       "conceptHighlights": [
         "Exploração estética generativa simulando dinâmicas de drifting em neve profunda.",
         "Direção de arte cinemática focada no contraste dramático de faróis em névoa noturna densa.",
         "Edição rítmica e geração de texturas procedurais e reflexos realistas gerados por IA."
       ],
-      "cmfHighlights": [
-        "Carroceria em pintura fosca cinza especial com efeito reflexivo sob iluminação de estúdio.",
-        "Faróis em DRL LED inteligentes de projeção volumétrica com dispersão de luz.",
-        "Flocos de neve físicos simulados cobrindo superfícies estruturais de fibra de carbono."
-      ],
-      "iframeEmbed": "<iframe src=\"https://player.vimeo.com/video/1166975823?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1\" width=\"3840\" height=\"2160\" frameborder=\"0\" allow=\"autoplay; picture-in-picture\" sandbox=\"allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox\"></iframe>",
-      "iframeClass": "drawer-iframe-video",
+      "client": "EVOA Lab Studio",
+      "thumbnail": "assets/images/Lamborghini Concept - Animação 100% IA/Create a ultra high cinematic shot of The Car, textures and surfaces, ensure The car Rolling in the snow.png",
       "gallery": [
         "assets/images/Lamborghini Concept - Animação 100% IA/Create a ultra high cinematic shot of The Car, textures and surfaces, ensure The car Rolling in the snow.png",
         "assets/images/Lamborghini Concept - Animação 100% IA/Create a ultra high cinematic shot of The car drifting showcasing The material, textures and surfaces, ensure The car is rally..png",
@@ -96,56 +83,58 @@
         "assets/images/Lamborghini Concept - Animação 100% IA/38.png",
         "assets/images/Lamborghini Concept - Animação 100% IA/39.png",
         "assets/images/Lamborghini Concept - Animação 100% IA/40.png"
-      ]
+      ],
+      "iframeClass": "drawer-iframe-video",
+      "iframeEmbed": "<iframe src=\"https://player.vimeo.com/video/1166975823?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1\" width=\"3840\" height=\"2160\" frameborder=\"0\" allow=\"autoplay; picture-in-picture\" sandbox=\"allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox\"></iframe>",
+      "title": "Lamborghini IA Concept",
+      "cmfHighlights": [
+        "Carroceria em pintura fosca cinza especial com efeito reflexivo sob iluminação de estúdio.",
+        "Faróis em DRL LED inteligentes de projeção volumétrica com dispersão de luz.",
+        "Flocos de neve físicos simulados cobrindo superfícies estruturais de fibra de carbono."
+      ],
+      "id": "4",
+      "tools": "Vizcom, After Effects, Photoshop",
+      "description": "Estudo experimental de direção de arte, modelagem conceitual e geração de animação com Inteligência Artificial integrando o carro em cenários extremos como neve, rally e drifting noturno. Uma fusão fantástica entre a sofisticação da marca e o poder das redes neurais de IA.",
+      "year": "2026",
+      "category": "Direção de Arte & IA"
     },
     {
-      "id": "5",
-      "title": "Nissan Kicks - CGI + IA",
-      "category": "CGI Automotivo & IA",
-      "client": "Nissan Global & EVOA Concept",
-      "year": "2025",
-      "tools": "Autodesk VRED, Kling, After Effects",
-      "description": "Direção de CGI avançado e integração de Inteligência Artificial generativa na composição do modelo Nissan Kicks e no styling ergonômico futurista do cockpit conceitual P13C, combinando precisão 3D e velocidade de produção generativa.",
       "shortDescription": "CGI avançado integrado com Inteligência Artificial e styling conceitual de cockpit inteligente.",
-      "thumbnail": "assets/images/Nissan Kicks - CGI + IA/P13C_FRONT_DYNAMIC_V1_002.png",
       "conceptHighlights": [
         "Ambiente em Unreal Engine simulando corrida e aerodinâmica de alto nível.",
         "Design futurista de cockpit driver-centric voltado para piloto inteligente.",
         "Simulação de luzes dinâmicas de painel e reflexos de fibra de carbono."
       ],
-      "cmfHighlights": [
-        "Estofamento premium em alcantara preta com costuras esportivas vermelhas.",
-        "Painéis de controle internos revestidos em dry-carbon fosco.",
-        "Monitores OLED integrados simulando HUD e realidade aumentada."
-      ],
+      "client": "Nissan Global & EVOA Concept",
+      "thumbnail": "assets/images/Nissan Kicks - CGI + IA/P13C_FRONT_DYNAMIC_V1_002.png",
       "gallery": [
         "assets/images/Nissan Kicks - CGI + IA/P13C_FRONT_DYNAMIC_V1_002.png",
         "assets/images/Nissan Kicks - CGI + IA/P13C_INTERIOR_FRONT_DRIVER_SEAT_V1_001.png",
         "assets/images/Nissan Kicks - CGI + IA/P13C_HEADLIGHTS_V1_002.png",
         "assets/images/Nissan Kicks - CGI + IA/P13C_TAIL_LIGHTS_V1_001.png",
         "assets/images/Nissan Kicks - CGI + IA/P13C_FRONT_TOP_VIEW_V1_001.png"
-      ]
+      ],
+      "title": "Nissan Kicks - CGI + IA",
+      "cmfHighlights": [
+        "Estofamento premium em alcantara preta com costuras esportivas vermelhas.",
+        "Painéis de controle internos revestidos em dry-carbon fosco.",
+        "Monitores OLED integrados simulando HUD e realidade aumentada."
+      ],
+      "id": "5",
+      "tools": "Autodesk VRED, Kling, After Effects",
+      "description": "Direção de CGI avançado e integração de Inteligência Artificial generativa na composição do modelo Nissan Kicks e no styling ergonômico futurista do cockpit conceitual P13C, combinando precisão 3D e velocidade de produção generativa.",
+      "year": "2025",
+      "category": "CGI Automotivo & IA"
     },
     {
-      "id": "8",
-      "title": "Nissan Magnite – Lançamento Oficial México",
-      "category": "CGI & Visualização Publicitária",
-      "client": "Nissan México",
-      "year": "2025",
-      "tools": "Autodesk VRED, Photoshop",
-      "description": "Direção técnica de CGI fotorrealista de alto padrão e composições artísticas integradas para a campanha de lançamento oficial do veículo Nissan Magnite no mercado mexicano. Mapeamento de texturas e renders com precisão cinematográfica.",
       "shortDescription": "CGI de alto padrão e composições integradas para campanha de lançamento oficial do veículo.",
-      "thumbnail": "assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6348.PNG",
       "conceptHighlights": [
         "Visualização publicitária externa simulando o dinamismo de rodagem urbana.",
         "Estudo cromático e iluminação dramática sob céus mexicanos e luz quente.",
         "Pós-produção avançada integrada para campanhas de mídias de grande escala."
       ],
-      "cmfHighlights": [
-        "Pintura perolizada automotiva de dupla camada sob sol de alta intensidade.",
-        "Faróis em DRL acrílico escovado e frisos cromados refletores de luz física.",
-        "Rodas esportivas de liga leve com texturas de usinagem diamantada reais."
-      ],
+      "client": "Nissan México",
+      "thumbnail": "assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6348.PNG",
       "gallery": [
         "assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6348.PNG",
         "assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6401.PNG",
@@ -158,28 +147,28 @@
         "assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6564.PNG",
         "assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6565.PNG",
         "assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6566.PNG"
-      ]
+      ],
+      "title": "Nissan Magnite – Lançamento Oficial México",
+      "cmfHighlights": [
+        "Pintura perolizada automotiva de dupla camada sob sol de alta intensidade.",
+        "Faróis em DRL acrílico escovado e frisos cromados refletores de luz física.",
+        "Rodas esportivas de liga leve com texturas de usinagem diamantada reais."
+      ],
+      "id": "8",
+      "tools": "Autodesk VRED, Photoshop",
+      "description": "Direção técnica de CGI fotorrealista de alto padrão e composições artísticas integradas para a campanha de lançamento oficial do veículo Nissan Magnite no mercado mexicano. Mapeamento de texturas e renders com precisão cinematográfica.",
+      "year": "2025",
+      "category": "CGI & Visualização Publicitária"
     },
     {
-      "id": "2",
-      "title": "Nissan Versa - 100% CGI",
-      "category": "CGI Automotivo",
-      "client": "Nissan LatAm",
-      "year": "2025",
-      "tools": "Autodesk VRED, Photoshop",
-      "description": "Visualização tridimensional fotorrealista publicitária completa do modelo Nissan Versa. Criamos múltiplos cenários dramáticos de estúdio e iluminação de destaque para valorizar cada linha de design, materiais metálicos e reflexos da carroceria do veículo.",
       "shortDescription": "Visualização tridimensional fotorrealista publicitária sob estúdio dramático.",
-      "thumbnail": "assets/images/Nissan Versa - 100% CGI/Cópia de Nissan Versa Scene 1.png",
       "conceptHighlights": [
         "Ambiente de estúdio virtual com iluminação de destaque suave e reflexos controlados para fins de publicidade.",
         "Representação impecável dos detalhes dos faróis e frisos metálicos estruturais do veículo.",
         "Composição de câmera cinematográfica destacando o dinamismo, esportividade e sofisticação do modelo."
       ],
-      "cmfHighlights": [
-        "Pintura metálica automotiva premium com simulação de camada dupla de verniz reflexiva.",
-        "Faróis em acrílico injetado com refração e dispersão de luz fisicamente corretas.",
-        "Grelha frontal com acabamento de alto brilho em preto piano e detalhes em cromo polido."
-      ],
+      "client": "Nissan LatAm",
+      "thumbnail": "assets/images/Nissan Versa - 100% CGI/Cópia de Nissan Versa Scene 1.png",
       "gallery": [
         "assets/images/Nissan Versa - 100% CGI/Cópia de Nissan Versa Scene 1.png",
         "assets/images/Nissan Versa - 100% CGI/Cópia de Nissan Versa Scene 3.png",
@@ -189,30 +178,28 @@
         "assets/images/Nissan Versa - 100% CGI/Cópia de Nissan Versa Scene 10.png",
         "assets/images/Nissan Versa - 100% CGI/Cópia de Nissan Versa Scene 11.png",
         "assets/images/Nissan Versa - 100% CGI/Cópia de Nissan Versa Scene 12.png"
-      ]
+      ],
+      "title": "Nissan Versa - 100% CGI",
+      "cmfHighlights": [
+        "Pintura metálica automotiva premium com simulação de camada dupla de verniz reflexiva.",
+        "Faróis em acrílico injetado com refração e dispersão de luz fisicamente corretas.",
+        "Grelha frontal com acabamento de alto brilho em preto piano e detalhes em cromo polido."
+      ],
+      "id": "2",
+      "tools": "Autodesk VRED, Photoshop",
+      "description": "Visualização tridimensional fotorrealista publicitária completa do modelo Nissan Versa. Criamos múltiplos cenários dramáticos de estúdio e iluminação de destaque para valorizar cada linha de design, materiais metálicos e reflexos da carroceria do veículo.",
+      "year": "2025",
+      "category": "CGI Automotivo"
     },
     {
-      "id": "9",
-      "title": "Logcare - Redesign",
-      "category": "Identidade Visual & Branding",
-      "client": "Logcare Logística",
-      "year": "2026",
-      "tools": "Photoshop, Illustrator, After Effects",
-      "description": "Redesign completo de identidade visual corporativa, sistemas de papelaria de luxo e branding integrado para a Logcare. O projeto estabelece padrões de tipografia proprietária, layout tátil e design conceitual contemporâneo.",
       "shortDescription": "Redesign completo de identidade visual corporativa, papelaria de luxo e branding integrado.",
-      "thumbnail": "assets/images/Logcare - Redesign & Identidade Visual/1.gif",
       "conceptHighlights": [
         "Redesign tipográfico e desenvolvimento de logotipo com geometria de alta precisão.",
         "Construção de ecossistema de marca coeso para aplicações digitais e físicas.",
         "Estudo tridimensional integrado para simular cartões de visita e papelaria premium."
       ],
-      "cmfHighlights": [
-        "Papéis finos texturizados com alta gramatura e tratamento ecológico.",
-        "Paleta de cores corporativa combinando tons sóbrios e contrastes dinâmicos.",
-        "Acabamentos premium com relevo seco e verniz localizado de alto brilho."
-      ],
-      "iframeEmbed": "<iframe frameborder=\"0\" class=\"juxtapose\" width=\"100%\" height=\"270\" src=\"https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=047f31ae-578b-11ef-9396-d93975fe8866\" sandbox=\"allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox\"></iframe>",
-      "iframeClass": "drawer-iframe-juxtapose",
+      "client": "Logcare Logística",
+      "thumbnail": "assets/images/Logcare - Redesign & Identidade Visual/1.gif",
       "gallery": [
         "assets/images/Logcare - Redesign & Identidade Visual/1.gif",
         "assets/images/Logcare - Redesign & Identidade Visual/2.jpg",
@@ -230,28 +217,30 @@
         "assets/images/Logcare - Redesign & Identidade Visual/14.jpg",
         "assets/images/Logcare - Redesign & Identidade Visual/15.jpg",
         "assets/images/Logcare - Redesign & Identidade Visual/16.jpg"
-      ]
+      ],
+      "iframeClass": "drawer-iframe-juxtapose",
+      "iframeEmbed": "<iframe frameborder=\"0\" class=\"juxtapose\" width=\"100%\" height=\"270\" src=\"https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=047f31ae-578b-11ef-9396-d93975fe8866\" sandbox=\"allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox\"></iframe>",
+      "title": "Logcare - Redesign",
+      "cmfHighlights": [
+        "Papéis finos texturizados com alta gramatura e tratamento ecológico.",
+        "Paleta de cores corporativa combinando tons sóbrios e contrastes dinâmicos.",
+        "Acabamentos premium com relevo seco e verniz localizado de alto brilho."
+      ],
+      "id": "9",
+      "tools": "Photoshop, Illustrator, After Effects",
+      "description": "Redesign completo de identidade visual corporativa, sistemas de papelaria de luxo e branding integrado para a Logcare. O projeto estabelece padrões de tipografia proprietária, layout tátil e design conceitual contemporâneo.",
+      "year": "2026",
+      "category": "Identidade Visual & Branding"
     },
     {
-      "id": "3",
-      "title": "Jeep Cardisplay",
-      "category": "Cenografia & Display",
-      "client": "Jeep Brasil",
-      "year": "2026",
-      "tools": "3ds Max, Corona Renderer, Photoshop",
-      "description": "Desenho cenográfico tridimensional de alto impacto para exposição e displays comerciais (Car Display) da marca Jeep. Modelagem integrada da estrutura metálica de exposição e iluminação ambiente para showrooms premium e stands de feiras de grande porte.",
       "shortDescription": "Desenho cenográfico tridimensional de alto impacto para exposição e displays Jeep.",
-      "thumbnail": "assets/images/Jeep Cardisplay/FCA_0358_EST_V2_001.png",
       "conceptHighlights": [
         "Desenho de estande de exposição automotiva integrado com pegada robusta, moderna e off-road.",
         "Cenografia em balanço e plataformas integradas de visualização periférica de 360 graus.",
         "Iluminação indireta em perfis de LED de alta intensidade valorizando a silhueta geométrica do carro."
       ],
-      "cmfHighlights": [
-        "Estrutura metálica industrial robusta em aço carbono preto fosco texturizado.",
-        "Plataformas de base em madeira rústica de demolição tratada e texturas de pedra vulcânica tátil.",
-        "Painéis de fundo arquitetônicos em concreto escovado com relevo chumbo de altíssimo contraste."
-      ],
+      "client": "Jeep Brasil",
+      "thumbnail": "assets/images/Jeep Cardisplay/FCA_0358_EST_V2_001.png",
       "gallery": [
         "assets/images/Jeep Cardisplay/FCA_0358_EST_V2_001.png",
         "assets/images/Jeep Cardisplay/FCA_0358_EST_V2_002.png",
@@ -260,28 +249,28 @@
         "assets/images/Jeep Cardisplay/FCA_0358_EST_001.png",
         "assets/images/Jeep Cardisplay/FCA_0358_EST_003.png",
         "assets/images/Jeep Cardisplay/FCA_0358_EST_009.png"
-      ]
+      ],
+      "title": "Jeep Cardisplay",
+      "cmfHighlights": [
+        "Estrutura metálica industrial robusta em aço carbono preto fosco texturizado.",
+        "Plataformas de base em madeira rústica de demolição tratada e texturas de pedra vulcânica tátil.",
+        "Painéis de fundo arquitetônicos em concreto escovado com relevo chumbo de altíssimo contraste."
+      ],
+      "id": "3",
+      "tools": "3ds Max, Corona Renderer, Photoshop",
+      "description": "Desenho cenográfico tridimensional de alto impacto para exposição e displays comerciais (Car Display) da marca Jeep. Modelagem integrada da estrutura metálica de exposição e iluminação ambiente para showrooms premium e stands de feiras de grande porte.",
+      "year": "2026",
+      "category": "Cenografia & Display"
     },
     {
-      "id": "6",
-      "title": "Abarth Racer's Academy",
-      "category": "Cenografia & Experiência",
-      "client": "Stellantis Group",
-      "year": "2024",
-      "tools": "3ds Max, Corona Renderer, Photoshop",
-      "description": "Proposta arquitetônica cenográfica monumental completa e desenho da jornada de experiência do usuário para a Abarth Racer's Academy. Criamos áreas de lounge de altíssimo luxo corporativo, espaços imersivos digitais e mostruários de vestuário tátil AbarthWear.",
       "shortDescription": "Proposta cenográfica completa, lounges luxuosos corporativos e jornada do usuário imersiva.",
-      "thumbnail": "assets/images/Abarth Racer's Academy - Design de Cenografia e Jornada do usuário/FCA_0291_23 ABARTH RACER´S ACADEMY_ABARTH LOUNGE_V07_01.jpg",
       "conceptHighlights": [
         "Desenho de lounge corporativo premium e imersivo com identidade Abarth.",
         "Jornada de usuário engajadora integrando simuladores virtuais e vestuário.",
         "Visualização 3D focada no conforto luxuoso, cores dramáticas e sofisticação."
       ],
-      "cmfHighlights": [
-        "Painéis de parede em chapa metálica preta texturizada com emblemas retroiluminados.",
-        "Mobiliário de luxo revestido em couro italiano legítimo com costuras vermelhas.",
-        "Mostruários AbarthWear em acrílico cristal e perfis de aço escovado."
-      ],
+      "client": "Stellantis Group",
+      "thumbnail": "assets/images/Abarth Racer's Academy - Design de Cenografia e Jornada do usuário/FCA_0291_23 ABARTH RACER´S ACADEMY_ABARTH LOUNGE_V07_01.jpg",
       "gallery": [
         "assets/images/Abarth Racer's Academy - Design de Cenografia e Jornada do usuário/FCA_0291_23 ABARTH RACER´S ACADEMY_ABARTH LOUNGE_V07_01.jpg",
         "assets/images/Abarth Racer's Academy - Design de Cenografia e Jornada do usuário/FCA_0291_23 ABARTH RACER´S ACADEMY_ABARTH LOUNGE_V07_02.jpg",
@@ -292,7 +281,18 @@
         "assets/images/Abarth Racer's Academy - Design de Cenografia e Jornada do usuário/FCA_0291_23 ABARTH RACER´S ACADEMY_AbarthWear_V07_04a.jpg",
         "assets/images/Abarth Racer's Academy - Design de Cenografia e Jornada do usuário/FCA_0291_23 ABARTH RACER´S ACADEMY_AbarthWear_V07_05a.jpg",
         "assets/images/Abarth Racer's Academy - Design de Cenografia e Jornada do usuário/FCA_0291_23 ABARTH RACER´S ACADEMY_PICTURE_OPPORTUNITY_ESCORPIÃO_V3_001.jpg"
-      ]
+      ],
+      "title": "Abarth Racer's Academy",
+      "cmfHighlights": [
+        "Painéis de parede em chapa metálica preta texturizada com emblemas retroiluminados.",
+        "Mobiliário de luxo revestido em couro italiano legítimo com costuras vermelhas.",
+        "Mostruários AbarthWear em acrílico cristal e perfis de aço escovado."
+      ],
+      "id": "6",
+      "tools": "3ds Max, Corona Renderer, Photoshop",
+      "description": "Proposta arquitetônica cenográfica monumental completa e desenho da jornada de experiência do usuário para a Abarth Racer's Academy. Criamos áreas de lounge de altíssimo luxo corporativo, espaços imersivos digitais e mostruários de vestuário tátil AbarthWear.",
+      "year": "2024",
+      "category": "Cenografia & Experiência"
     }
   ]
 }
