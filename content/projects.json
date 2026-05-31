@@ -1,12 +1,8 @@
 {
   "items": [
     {
-      "shortDescription": "Estudo de renderização de alta fidelidade e variantes estéticas dos relógios SOVRANO.",
-      "conceptHighlights": [
-        "Mapeamento tridimensional integrado das variantes Azul, Branco e Preto com modelagem de precisão de caixa e mostrador.",
-        "Estudo detalhado de refração do vidro de safira curvo e reflexos antirreflexo sob iluminação física simulada.",
-        "Criação de detalhes internos do mostrador e ponteiros com modelagem microscópica para valorização da engenharia do relógio."
-      ],
+      "shortDescription": "Renderização de alta fidelidade e variantes estéticas dos relógios SOVRANO.",
+      "conceptHighlights": [],
       "client": "SOVRANO Watches",
       "thumbnail": "assets/images/SOVRANO - Visualização de Produto com IA/Azul/SOVRANO_PRINCIPATO_AZUL_7.png",
       "gallery": [
@@ -19,14 +15,10 @@
         "assets/images/SOVRANO - Visualização de Produto com IA/Preto/SOVRANO_PRINCIPATO_PRETO_2.png"
       ],
       "title": "SOVRANO Principato - Imagens de produto com Inteligência Artificial",
-      "cmfHighlights": [
-        "Aço inoxidável 316L escovado com detalhes chanfrados polidos espelhados.",
-        "Mostradores texturizados com acabamento sunburst em cores Azul, Branco e Preto.",
-        "Pulseiras premium em couro legítimo texturizado e fivelas de aço personalizadas com gravação a laser."
-      ],
+      "cmfHighlights": [],
       "id": "1",
-      "tools": "Vizcom, Photoshop",
-      "description": "Estudo de renderização tridimensional de alta fidelidade e variantes estéticas dos relógios premium SOVRANO. Criamos três variantes completas (Azul, Branco e Preto) explorando materiais metálicos de luxo, reflexos de vidro de safira e acabamentos sob iluminação física complexa.",
+      "tools": "Vizcom, Photoshop e Blender 3D",
+      "description": "Renderização tridimensional de alta fidelidade e variantes estéticas dos relógios premium SOVRANO. Criamos três variantes completas (Azul, Branco e Preto) explorando materiais metálicos de luxo, reflexos de vidro de safira e acabamentos sob iluminação física complexa.",
       "year": "2026",
       "category": "CGI & Visualização com IA"
     },
@@ -100,11 +92,7 @@
     },
     {
       "shortDescription": "CGI avançado integrado com Inteligência Artificial.",
-      "conceptHighlights": [
-        "Ambiente em Unreal Engine simulando corrida e aerodinâmica de alto nível.",
-        "Design futurista de cockpit driver-centric voltado para piloto inteligente.",
-        "Simulação de luzes dinâmicas de painel e reflexos de fibra de carbono."
-      ],
+      "conceptHighlights": [],
       "client": "Nissan Design Latin America",
       "thumbnail": "assets/images/Nissan Kicks - CGI + IA/P13C_FRONT_DYNAMIC_V1_002.png",
       "gallery": [
@@ -115,11 +103,7 @@
         "assets/images/Nissan Kicks - CGI + IA/P13C_FRONT_TOP_VIEW_V1_001.png"
       ],
       "title": "Nissan Kicks - CGI + IA",
-      "cmfHighlights": [
-        "Estofamento premium em alcantara preta com costuras esportivas vermelhas.",
-        "Painéis de controle internos revestidos em dry-carbon fosco.",
-        "Monitores OLED integrados simulando HUD e realidade aumentada."
-      ],
+      "cmfHighlights": [],
       "id": "5",
       "tools": "Autodesk VRED, Kling, After Effects",
       "description": "Direção de CGI avançado e integração de Inteligência Artificial generativa na composição do modelo Nissan Kicks, combinando precisão 3D e velocidade de produção generativa.",
