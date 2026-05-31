@@ -337,6 +337,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const initGlobalSettings = (settings) => {
     if (!settings) return;
 
+    // 0. Dynamic Favicon Management
+    if (settings.favicon) {
+      let link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.href = settings.favicon;
+    }
+
+    // 0.1 Image Protection (Disable Saving/Right-click/Dragging)
+    if (settings.disableImageSave) {
+      document.addEventListener('contextmenu', (e) => {
+        if (e.target.tagName === 'IMG' || e.target.closest('img') || e.target.closest('.pa-image-wrapper') || e.target.closest('.drawer-gallery')) {
+          e.preventDefault();
+        }
+      });
+      document.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'IMG' || e.target.closest('img')) {
+          e.preventDefault();
+        }
+      });
+    }
+
     // 1. Title and SEO Description
     if (settings.seoTitle) {
       document.title = settings.seoTitle;
@@ -482,19 +507,45 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!data) return;
 
       // Compile and Inject HTML content
-      let conceptListHTML = data.conceptHighlights.map(item => `
-        <li>
-          <span class="drawer-highlight-bullet"></span>
-          <span>${item}</span>
-        </li>
-      `).join('');
+      let conceptSectionHTML = '';
+      if (data.showConceptHighlights !== false && data.conceptHighlights && data.conceptHighlights.length > 0) {
+        let conceptListHTML = data.conceptHighlights.map(item => `
+          <li>
+            <span class="drawer-highlight-bullet"></span>
+            <span>${item}</span>
+          </li>
+        `).join('');
+        
+        conceptSectionHTML = `
+          <!-- Section: Conceito e Styling -->
+          <div class="drawer-section">
+            <h3 class="drawer-section-title">Conceito & Styling</h3>
+            <ul class="drawer-highlight-list">
+              ${conceptListHTML}
+            </ul>
+          </div>
+        `;
+      }
 
-      let cmfListHTML = data.cmfHighlights.map(item => `
-        <li>
-          <span class="drawer-highlight-bullet"></span>
-          <span>${item}</span>
-        </li>
-      `).join('');
+      let cmfSectionHTML = '';
+      if (data.showCmfHighlights !== false && data.cmfHighlights && data.cmfHighlights.length > 0) {
+        let cmfListHTML = data.cmfHighlights.map(item => `
+          <li>
+            <span class="drawer-highlight-bullet"></span>
+            <span>${item}</span>
+          </li>
+        `).join('');
+        
+        cmfSectionHTML = `
+          <!-- Section: Cores, Materiais & Acabamento -->
+          <div class="drawer-section">
+            <h3 class="drawer-section-title">CMF & Especificações</h3>
+            <ul class="drawer-highlight-list">
+              ${cmfListHTML}
+            </ul>
+          </div>
+        `;
+      }
 
       let galleryHTML = '';
       if (data.iframeEmbed) {
@@ -531,21 +582,9 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
 
-        <!-- Section: Conceito e Styling -->
-        <div class="drawer-section">
-          <h3 class="drawer-section-title">Conceito & Styling</h3>
-          <ul class="drawer-highlight-list">
-            ${conceptListHTML}
-          </ul>
-        </div>
+        ${conceptSectionHTML}
 
-        <!-- Section: Cores, Materiais & Acabamento -->
-        <div class="drawer-section">
-          <h3 class="drawer-section-title">CMF & Especificações</h3>
-          <ul class="drawer-highlight-list">
-            ${cmfListHTML}
-          </ul>
-        </div>
+        ${cmfSectionHTML}
 
         <!-- Section: Galeria Cinematic 3D -->
         <div class="drawer-section">

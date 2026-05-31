@@ -29,6 +29,8 @@ collections:
         fields:
           - { label: "Título do Site (SEO)", name: "seoTitle", widget: "string", description: "O título exibido na aba do navegador e nos resultados de busca do Google." }
           - { label: "Descrição do Site (SEO)", name: "seoDescription", widget: "text", description: "Uma breve descrição do site para mecanismos de busca (Google Meta Description)." }
+          - { label: "Favicon do Site", name: "favicon", widget: "image", description: "O pequeno ícone exibido na aba do navegador (recomenda-se PNG de 32x32px)." }
+          - { label: "Bloquear Salvamento de Imagens", name: "disableImageSave", widget: "boolean", default: true, description: "Desativa o clique direito e o arrastar de imagens para proteção de direitos autorais." }
           - { label: "Subtítulo do Hero", name: "heroSubtitle", widget: "string", description: "Texto pequeno acima do título principal no Hero." }
           - { label: "Título do Hero", name: "heroTitle", widget: "string", description: "Título principal no Hero (suporta tags HTML como span para efeitos de texto)." }
           - { label: "Tag do Manifesto / Sobre", name: "aboutTag", widget: "string", description: "Marcador pequeno acima do texto do manifesto." }
@@ -87,11 +89,13 @@ collections:
               - { label: "Imagem de Capa (Thumbnail)", name: "thumbnail", widget: "image", description: "Imagem principal exibida no card do portfólio." }
               - { label: "Vídeo Incorporado (Vimeo/YouTube Embed - Opcional)", name: "iframeEmbed", widget: "string", required: false, description: "Código HTML iframe do vídeo (ex: Vimeo) para rodar no topo da galeria do projeto." }
               - { label: "Classe Customizada do Vídeo (Opcional)", name: "iframeClass", widget: "string", required: false, default: "drawer-iframe-video", description: "Classe CSS para o iframe de vídeo." }
+              - { label: "Exibir Destaques de Conceito & Styling", name: "showConceptHighlights", widget: "boolean", default: true, description: "Ative para exibir a seção de conceito na gaveta lateral." }
               - name: "conceptHighlights"
                 label: "Destaques de Conceito & Styling (Lista)"
                 widget: "list"
                 field: { label: "Destaque", name: "highlight", widget: "string" }
                 description: "Pontos de destaque sobre a modelagem, direção de arte ou styling do projeto."
+              - { label: "Exibir Destaques de CMF & Especificações", name: "showCmfHighlights", widget: "boolean", default: true, description: "Ative para exibir a seção de especificações de CMF na gaveta lateral." }
               - name: "cmfHighlights"
                 label: "Destaques CMF & Acabamento (Lista)"
                 widget: "list"

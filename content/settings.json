@@ -1,4 +1,15 @@
 {
+  "seoTitle": "evoadesign | Estúdio de Design, CGI de Alta Fidelidade e Identidade Visual",
+  "seoDescription": "A evoadesign une sensibilidade artística e rigor técnico para traduzir ideias complexas em imagens CGI fotorrealistas e soluções visuais integradas de altíssimo impacto.",
+  "favicon": "assets/images/cms/favicon.png",
+  "disableImageSave": true,
+  "heroSubtitle": "ESTÚDIO DE DESIGN & CGI",
+  "heroTitle": "Nós criamos <span class=\"text-primary\">experiências visuais</span> de <span class=\"text-glow\">altíssimo impacto.</span>",
+  "aboutTag": "MANIFESTO DO ESTÚDIO",
+  "aboutText": "Design multidisciplinar focado na precisão fotorrealista e na vanguarda conceitual. Traduzimos ideias complexas em imagens CGI de altíssimo impacto.",
+  "aboutDescription": "A evoadesign une sensibilidade artística e rigor técnico para traduzir ideias complexas em imagens CGI fotorrealistas e soluções visuais integradas. Nossos projetos são estruturados sob medida para encantar seu público e multiplicar o valor da sua marca.",
+  "contactEmail": "vitor.belluco@evoadesign.com.br",
+  "contactWhatsapp": "+55 (19) 99857-1988",
   "footerCnpj": "48.909.461/0001-08",
   "footerRazaoSocial": "EVOA DESIGN STUDIO LTDA",
   "socialLinks": [
@@ -10,14 +21,5 @@
       "platform": "instagram",
       "url": "www.instagram.com/evoa_design"
     }
-  ],
-  "aboutTag": "MANIFESTO DO ESTÚDIO",
-  "aboutDescription": "A evoadesign une sensibilidade artística e rigor técnico para traduzir ideias complexas em imagens CGI fotorrealistas e soluções visuais integradas. Nossos projetos são estruturados sob medida para encantar seu público e multiplicar o valor da sua marca.",
-  "contactWhatsapp": "+55 (19) 99857-1988",
-  "heroSubtitle": "ESTÚDIO DE DESIGN & CGI",
-  "aboutText": "Design multidisciplinar focado na precisão fotorrealista e na vanguarda conceitual. Traduzimos ideias complexas em imagens CGI de altíssimo impacto.",
-  "seoTitle": "EVOA | Estúdio de Design, CGI de Alta Fidelidade e Identidade Visual",
-  "contactEmail": "vitor.belluco@evoadesign.com.br",
-  "heroTitle": "Nós criamos <span class=\"text-primary\">experiências visuais</span> de <span class=\"text-glow\">altíssimo impacto.</span>",
-  "seoDescription": "A evoadesign une sensibilidade artística e rigor técnico para traduzir ideias complexas em imagens CGI fotorrealistas e soluções visuais integradas de altíssimo impacto."
+  ]
 }
