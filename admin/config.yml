@@ -1,0 +1,84 @@
+# Decap CMS Configuration for evoadesign portfolio
+# ==============================================================================
+
+# Enable local file system editing when running decap-cms-proxy-server locally
+local_backend: true
+
+# Git Gateway configuration for Netlify production authentication
+backend:
+  name: git-gateway
+  branch: main # Default production branch
+
+# Media uploads directory in project workspace
+media_folder: "assets/images/cms"
+public_folder: "assets/images/cms"
+
+# Collections Definitions
+collections:
+  # 1. Global Configurations Collection
+  - name: "config"
+    label: "Configurações Globais"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "settings"
+        label: "Configurações do Site & SEO"
+        file: "content/settings.json"
+        description: "Altere os textos institucionais da página inicial, e-mails de contato e títulos de SEO."
+        fields:
+          - { label: "Título do Site (SEO)", name: "seoTitle", widget: "string", description: "O título exibido na aba do navegador e nos resultados de busca do Google." }
+          - { label: "Descrição do Site (SEO)", name: "seoDescription", widget: "text", description: "Uma breve descrição do site para mecanismos de busca (Google Meta Description)." }
+          - { label: "Subtítulo do Hero", name: "heroSubtitle", widget: "string", description: "Texto pequeno acima do título principal no Hero." }
+          - { label: "Título do Hero", name: "heroTitle", widget: "string", description: "Título principal no Hero (suporta tags HTML como span para efeitos de texto)." }
+          - { label: "Tag do Manifesto / Sobre", name: "aboutTag", widget: "string", description: "Marcador pequeno acima do texto do manifesto." }
+          - { label: "Texto do Manifesto / Sobre", name: "aboutText", widget: "text", description: "Texto em destaque do Manifesto (grande escala visual)." }
+          - { label: "Descrição Detalhada do Sobre", name: "aboutDescription", widget: "text", description: "Texto descritivo menor abaixo do manifesto." }
+          - { label: "E-mail de Contato", name: "contactEmail", widget: "string", description: "O e-mail oficial exibido no formulário de contato e linkado para envio rápido." }
+          - { label: "WhatsApp de Contato", name: "contactWhatsapp", widget: "string", description: "O número do WhatsApp oficial exibido no formulário de contato e linkado no chat." }
+          - { label: "CNPJ da Empresa", name: "footerCnpj", widget: "string", description: "Exibido no rodapé do site." }
+          - { label: "Razão Social da Empresa", name: "footerRazaoSocial", widget: "string", description: "Exibido no rodapé do site." }
+
+  # 2. Portfolio Collection (All projects inside a single JSON array for zero-build static loading)
+  - name: "portfolio"
+    label: "Projetos"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "projects"
+        label: "Lista de Projetos"
+        file: "content/projects.json"
+        description: "Adicione, remova ou edite projetos no portfólio dinâmico do estúdio."
+        fields:
+          - name: "items"
+            label: "Projetos"
+            widget: "list"
+            summary: "{{fields.title}} ({{fields.category}})"
+            fields:
+              - { label: "ID do Projeto", name: "id", widget: "string", description: "Um identificador numérico único (ex: 1, 2, 3, etc.)." }
+              - { label: "Título do Projeto", name: "title", widget: "string", description: "Nome completo do projeto." }
+              - { label: "Categoria", name: "category", widget: "string", description: "A área criativa do projeto (ex: CGI Automotivo, CGI de Produto, etc.)." }
+              - { label: "Cliente", name: "client", widget: "string", description: "O nome do cliente ou estúdio de destino." }
+              - { label: "Ano", name: "year", widget: "string", description: "O ano de desenvolvimento do projeto." }
+              - { label: "Ferramentas / Softwares", name: "tools", widget: "string", description: "Softwares usados no projeto (ex: 3ds Max, VRED, Photoshop, etc.)." }
+              - { label: "Descrição Curta (Thumbnail)", name: "shortDescription", widget: "string", description: "Um texto curto exibido abaixo do card na página inicial." }
+              - { label: "Descrição Técnica Completa", name: "description", widget: "text", description: "O texto descritivo longo exibido dentro da gaveta de projetos (Project Drawer)." }
+              - { label: "Imagem de Capa (Thumbnail)", name: "thumbnail", widget: "image", description: "Imagem principal exibida no card do portfólio." }
+              - { label: "Vídeo Incorporado (Vimeo/YouTube Embed - Opcional)", name: "iframeEmbed", widget: "string", required: false, description: "Código HTML iframe do vídeo (ex: Vimeo) para rodar no topo da galeria do projeto." }
+              - { label: "Classe Customizada do Vídeo (Opcional)", name: "iframeClass", widget: "string", required: false, default: "drawer-iframe-video", description: "Classe CSS para o iframe de vídeo." }
+              - name: "conceptHighlights"
+                label: "Destaques de Conceito & Styling (Lista)"
+                widget: "list"
+                field: { label: "Destaque", name: "highlight", widget: "string" }
+                description: "Pontos de destaque sobre a modelagem, direção de arte ou styling do projeto."
+              - name: "cmfHighlights"
+                label: "Destaques CMF & Acabamento (Lista)"
+                widget: "list"
+                field: { label: "CMF", name: "cmf", widget: "string" }
+                description: "Especificações técnicas de cores, materiais e acabamento final."
+              - name: "gallery"
+                label: "Galeria de Renders (Imagens & GIFs)"
+                widget: "list"
+                field: { label: "Caminho da Imagem", name: "image", widget: "image" }
+                description: "Lista de imagens e GIFs em altíssima resolução que serão exibidos na gaveta lateral deslizante."

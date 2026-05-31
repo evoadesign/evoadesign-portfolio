@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Painel Administrativo | evoadesign</title>
+  <!-- Netlify Identity Widget (Required for Netlify Git Gateway authentication) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <!-- Decap CMS Core Script Bundle -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script>
+    // Customize Decap CMS page styling to fit the Cinematic Dark brand aesthetic slightly if needed
+    // (Decap CMS UI is heavily custom-rendered in React, but we can customize branding or text)
+    CMS.registerEventListener({
+      name: 'preSecure',
+      handler: () => {
+        console.log('Decap CMS initialized for evoadesign.');
+      },
+    });
+  </script>
+</body>
+</html>
