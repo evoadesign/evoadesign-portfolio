@@ -804,6 +804,8 @@
       
       <button class="login-btn" id="btn-login-identity">Fazer Login</button>
       <button class="login-btn login-btn-offline" id="btn-login-offline">Trabalhar Offline</button>
+      
+      <div style="font-size: 9px; color: var(--color-text-muted); margin-top: 24px; letter-spacing: 1px; text-transform: uppercase;">Build 2026.06.01.03 (CORS Fix)</div>
     </div>
   </div>
 
@@ -1399,6 +1401,11 @@
       const btnLoginOffline = document.getElementById('btn-login-offline');
       if (btnLoginOffline) {
         btnLoginOffline.addEventListener('click', () => {
+          if (typeof netlifyIdentity !== 'undefined') {
+            try {
+              netlifyIdentity.close();
+            } catch (e) {}
+          }
           offlineMode = true;
           document.getElementById('login-screen').style.opacity = '0';
           setTimeout(() => {
