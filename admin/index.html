@@ -796,6 +796,7 @@
 
   <!-- 1. LOGIN SCREEN -->
   <div id="login-screen">
+    <div id="global-error-banner" style="display: none; background: rgba(239, 68, 68, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 16px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; max-width: 440px; width: 100%; text-align: left; line-height: 1.5; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);"></div>
     <div class="login-card">
       <h1 class="login-logo">EVOA<span>.</span></h1>
       <div class="login-subtitle">Studio Builder</div>
@@ -1320,6 +1321,15 @@
        JS CORE CONTROLLER
        ========================================================================== -->
   <script>
+    // Global Error Logger for UI diagnostics
+    window.addEventListener('error', (event) => {
+      const banner = document.getElementById('global-error-banner');
+      if (banner) {
+        banner.style.display = 'block';
+        banner.innerHTML = `<strong>Erro de Execução Detectado:</strong><br>${event.message}<br><small style="color:var(--color-text-muted);">${event.filename ? event.filename.split('/').pop() : 'script'}:${event.lineno || 0}:${event.colno || 0}</small>`;
+      }
+    });
+
     // SPA memory states
     let globalSettings = {};
     let projectsDatabase = { items: [] };
