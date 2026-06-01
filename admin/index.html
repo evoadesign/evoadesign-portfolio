@@ -1386,7 +1386,7 @@
         btnLoginIdentity.addEventListener('click', () => {
           if (typeof netlifyIdentity !== 'undefined') {
             try {
-              netlifyIdentity.open();
+              netlifyIdentity.open('login');
             } catch (e) {
               alert("Erro ao abrir a janela de login do Netlify: " + e.message);
             }
