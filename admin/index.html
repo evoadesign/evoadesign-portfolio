@@ -1323,6 +1323,11 @@
        JS CORE CONTROLLER
        ========================================================================== -->
   <script>
+    // Force canonical domain without 'www' to prevent Netlify Identity CORS/Redirect failures
+    if (window.location.hostname === "www.evoadesign.com.br") {
+      window.location.replace("https://evoadesign.com.br" + window.location.pathname + window.location.search + window.location.hash);
+    }
+
     // Global Error Logger for UI diagnostics
     window.addEventListener('error', (event) => {
       const banner = document.getElementById('global-error-banner');
