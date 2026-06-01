@@ -906,6 +906,26 @@
             <textarea class="form-control" id="about-description" rows="5" oninput="updateGlobalSettings()"></textarea>
           </div>
 
+          <h2 class="form-section-title" style="margin-top: 32px;">Destaques / Credenciais</h2>
+
+          <div class="form-group">
+            <div class="switch-container">
+              <div class="switch-info">
+                <span class="form-label" style="margin-bottom: 0;">Exibir Seção de Destaques</span>
+                <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Exibe ou oculta a linha inteira de cards de destaques no Sobre.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="show-credentials-section" onchange="updateGlobalSettings()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="project-list" id="credentials-list-container">
+            <!-- Dynamic elements will be injected here -->
+          </div>
+          <button class="btn btn-secondary" onclick="openNewCredentialForm()" style="margin-bottom: 32px;">+ Adicionar Destaque</button>
+
           <h2 class="form-section-title" style="margin-top: 32px;">Últimos Clientes e Logos</h2>
 
           <div class="form-group">
@@ -1250,6 +1270,43 @@
     <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeFaqForm()">Cancelar</button>
   </div>
 
+  <!-- Credential Creator / Editor Overlay -->
+  <div class="subform-overlay" id="credential-editor-overlay">
+    <div class="subform-header">
+      <h3 class="subform-title" id="credential-subform-title">Editar Destaque</h3>
+      <button class="btn-icon btn-icon-danger" onclick="closeCredentialForm()">X</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="cred-title">Título do Destaque</label>
+      <input type="text" class="form-control" id="cred-title" placeholder="ex: Marcas Globais">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="cred-desc">Descrição do Destaque</label>
+      <textarea class="form-control" id="cred-desc" rows="4" placeholder="Escreva a descrição do destaque..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="cred-icon">Ícone do Destaque</label>
+      <select class="form-control" id="cred-icon">
+        <option value="globe">Globo (Internet / Conexão)</option>
+        <option value="gear">Engrenagem (Processos / Automotivo)</option>
+        <option value="cpu">Chip / CPU (Inteligência Artificial / Tecnologia)</option>
+        <option value="camera">Câmera Fotográfica (Imagem / CGI)</option>
+        <option value="video">Câmera de Vídeo (Animação / CGI)</option>
+        <option value="pen">Caneta (Design / Identidade Visual)</option>
+        <option value="star">Estrela (Prêmios / Destaque)</option>
+        <option value="zap">Raio (Velocidade / Impacto)</option>
+        <option value="eye">Olho (Visual / Visão Artística)</option>
+        <option value="layers">Camadas (Modelagem / Multidisciplinar)</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top: 32px;" onclick="saveCredentialForm()">Confirmar Destaque</button>
+    <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeCredentialForm()">Cancelar</button>
+  </div>
+
   <!-- 4. STATUS OVERLAY / LOADER PANEL -->
   <div id="status-overlay">
     <div class="status-box">
@@ -1269,6 +1326,7 @@
     let editingProjectId = null;
     let editingClientId = null;
     let editingFaqId = null;
+    let editingCredentialId = null;
     let offlineMode = false;
     let gitShaSettings = '';
     let gitShaProjects = '';
@@ -1423,6 +1481,7 @@
 
       document.getElementById('show-clients-section').checked = globalSettings.showClientsSection !== false;
       document.getElementById('show-faq-section').checked = globalSettings.showFaqSection !== false;
+      document.getElementById('show-credentials-section').checked = globalSettings.showCredentialsSection !== false;
 
       // Contact Tab
       document.getElementById('contact-whatsapp').value = globalSettings.contactWhatsapp || '';
@@ -1452,6 +1511,7 @@
       // Render clients and FAQs managers
       renderClientsManagerList();
       renderFaqsManagerList();
+      renderCredentialsManagerList();
 
       // Trigger initial preview sync inside iframe
       setTimeout(sendPreviewUpdate, 1200);
@@ -1515,6 +1575,7 @@
 
       globalSettings.showClientsSection = document.getElementById('show-clients-section').checked;
       globalSettings.showFaqSection = document.getElementById('show-faq-section').checked;
+      globalSettings.showCredentialsSection = document.getElementById('show-credentials-section').checked;
 
       globalSettings.contactWhatsapp = document.getElementById('contact-whatsapp').value;
       globalSettings.contactEmail = document.getElementById('contact-email').value;
@@ -1718,6 +1779,107 @@
       renderClientsManagerList();
       sendPreviewUpdate();
       closeClientForm();
+    };
+
+    const renderCredentialsManagerList = () => {
+      const container = document.getElementById('credentials-list-container');
+      container.innerHTML = '';
+
+      if (!globalSettings.credentials || globalSettings.credentials.length === 0) {
+        container.innerHTML = '<div style="font-size: 11px; text-align: center; padding: 12px 0; color: var(--color-text-muted);">Nenhum destaque cadastrado.</div>';
+        return;
+      }
+
+      globalSettings.credentials.forEach((cred, idx) => {
+        container.insertAdjacentHTML('beforeend', `
+          <div class="project-item">
+            <div class="project-meta" style="max-width: 65%;">
+              <div class="project-meta-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${cred.title || 'Sem título'}</div>
+              <div class="project-meta-category" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ícone: ${cred.icon || 'globe'} - ${cred.description || 'Sem descrição'}</div>
+            </div>
+            
+            <div class="project-actions">
+              <button class="btn-icon" onclick="moveCredentialUp(${idx})" title="Subir na Lista">↑</button>
+              <button class="btn-icon" onclick="moveCredentialDown(${idx})" title="Descer na Lista">↓</button>
+              <button class="btn-icon" onclick="editCredential(${idx})" title="Editar">✎</button>
+              <button class="btn-icon btn-icon-danger" onclick="deleteCredential(${idx})" title="Excluir">🗑</button>
+            </div>
+          </div>
+        `);
+      });
+    };
+
+    const moveCredentialUp = (idx) => {
+      if (idx === 0) return;
+      const temp = globalSettings.credentials[idx];
+      globalSettings.credentials[idx] = globalSettings.credentials[idx - 1];
+      globalSettings.credentials[idx - 1] = temp;
+      renderCredentialsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const moveCredentialDown = (idx) => {
+      if (idx === globalSettings.credentials.length - 1) return;
+      const temp = globalSettings.credentials[idx];
+      globalSettings.credentials[idx] = globalSettings.credentials[idx + 1];
+      globalSettings.credentials[idx + 1] = temp;
+      renderCredentialsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const deleteCredential = (idx) => {
+      if (confirm(`Tem certeza que deseja excluir permanentemente o destaque "${globalSettings.credentials[idx].title}"?`)) {
+        globalSettings.credentials.splice(idx, 1);
+        renderCredentialsManagerList();
+        sendPreviewUpdate();
+      }
+    };
+
+    const openNewCredentialForm = () => {
+      editingCredentialId = null;
+      document.getElementById('credential-subform-title').textContent = 'Novo Destaque';
+      document.getElementById('cred-title').value = '';
+      document.getElementById('cred-desc').value = '';
+      document.getElementById('cred-icon').value = 'globe';
+      document.getElementById('credential-editor-overlay').style.display = 'flex';
+    };
+
+    const editCredential = (idx) => {
+      editingCredentialId = idx;
+      const cred = globalSettings.credentials[idx];
+      document.getElementById('credential-subform-title').textContent = 'Editar Destaque';
+      document.getElementById('cred-title').value = cred.title || '';
+      document.getElementById('cred-desc').value = cred.description || '';
+      document.getElementById('cred-icon').value = cred.icon || 'globe';
+      document.getElementById('credential-editor-overlay').style.display = 'flex';
+    };
+
+    const closeCredentialForm = () => {
+      document.getElementById('credential-editor-overlay').style.display = 'none';
+    };
+
+    const saveCredentialForm = () => {
+      const title = document.getElementById('cred-title').value.trim();
+      const description = document.getElementById('cred-desc').value.trim();
+      const icon = document.getElementById('cred-icon').value;
+      if (!title || !description) {
+        alert("Ambos título e descrição são obrigatórios!");
+        return;
+      }
+
+      const newCred = { title, description, icon };
+
+      if (!globalSettings.credentials) globalSettings.credentials = [];
+
+      if (editingCredentialId === null) {
+        globalSettings.credentials.push(newCred);
+      } else {
+        globalSettings.credentials[editingCredentialId] = newCred;
+      }
+
+      renderCredentialsManagerList();
+      sendPreviewUpdate();
+      closeCredentialForm();
     };
 
     const renderFaqsManagerList = () => {

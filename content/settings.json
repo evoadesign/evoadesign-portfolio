@@ -29,6 +29,24 @@
   "faqTitle": "Dúvidas Frequentes",
   "showClientsSection": true,
   "showFaqSection": true,
+  "showCredentialsSection": true,
+  "credentials": [
+    {
+      "title": "Marcas Globais",
+      "description": "Colaborações diretas estabelecidas com grandes nomes da indústria, incluindo Stellantis, CAIO Induscar, RV Trans e Score Group.",
+      "icon": "globe"
+    },
+    {
+      "title": "Portfólio Automotivo",
+      "description": "Desenvolvimento de CGI publicitário de alto padrão e projetos fotorrealistas para modelos da Nissan (Magnite, Versa, Kicks), Jeep e Abarth.",
+      "icon": "gear"
+    },
+    {
+      "title": "Inovação com IA",
+      "description": "Integração de Inteligência Artificial generativa nos fluxos de renderização para acelerar a geração de texturas procedurais hiper-realistas e interpolar quadros.",
+      "icon": "cpu"
+    }
+  ],
   "clients": [
     {
       "name": "Stellantis",
