@@ -1344,7 +1344,7 @@
     // ==========================================
     // 1. INITIALIZATION & AUTHENTICATION (Netlify Identity)
     // ==========================================
-    document.addEventListener("DOMContentLoaded", () => {
+    const initializeBuilder = () => {
       const hasIdentity = typeof netlifyIdentity !== 'undefined';
 
       if (hasIdentity) {
@@ -1406,7 +1406,14 @@
           }, 500);
         });
       }
-    });
+    };
+
+    // Run initialization safely, avoiding browser DOMContentLoaded race conditions
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initializeBuilder);
+    } else {
+      initializeBuilder();
+    }
 
     const handleUserLogin = (user) => {
       document.getElementById('login-screen').style.opacity = '0';
