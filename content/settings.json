@@ -29,7 +29,7 @@
   "faqTitle": "Dúvidas Frequentes",
   "showClientsSection": true,
   "showFaqSection": true,
-  "showCredentialsSection": true,
+  "showCredentialsSection": false,
   "credentials": [
     {
       "title": "Marcas Globais",
