@@ -805,7 +805,7 @@
       <button class="login-btn" id="btn-login-identity">Fazer Login</button>
       <button class="login-btn login-btn-offline" id="btn-login-offline">Trabalhar Offline</button>
       
-      <div style="font-size: 9px; color: var(--color-text-muted); margin-top: 24px; letter-spacing: 1px; text-transform: uppercase;">Build 2026.06.01.04 (CSS Isolation Fix)</div>
+      <div style="font-size: 9px; color: var(--color-text-muted); margin-top: 24px; letter-spacing: 1px; text-transform: uppercase;">Build 2026.06.01.05 (Diagnostics)</div>
     </div>
   </div>
 
@@ -1380,6 +1380,11 @@
           });
         } catch (e) {
           console.error("Erro na inicialização do Netlify Identity:", e);
+          const banner = document.getElementById('global-error-banner');
+          if (banner) {
+            banner.style.display = 'block';
+            banner.innerHTML = `<strong>Falha na Inicialização do Netlify:</strong><br>${e.message}`;
+          }
         }
       } else {
         console.warn("Netlify Identity widget não foi carregado. Operando em modo de fallback offline.");
@@ -1391,9 +1396,14 @@
         btnLoginIdentity.addEventListener('click', () => {
           if (typeof netlifyIdentity !== 'undefined') {
             try {
+              btnLoginIdentity.textContent = "Conectando...";
               netlifyIdentity.open();
+              setTimeout(() => {
+                btnLoginIdentity.textContent = "Fazer Login";
+              }, 4000);
             } catch (e) {
               alert("Erro ao abrir a janela de login do Netlify: " + e.message);
+              btnLoginIdentity.textContent = "Fazer Login";
             }
           } else {
             alert("O serviço de autenticação do Netlify não pôde ser carregado.\n\nProváveis causas:\n1. Falha de conexão com a internet.\n2. Uso de bloqueadores de anúncios/scripts no navegador.\n3. Acesso direto por arquivo local (file://). Certifique-se de servir a página sob um domínio HTTP/HTTPS.\n\nPor favor, recarregue a página.");
