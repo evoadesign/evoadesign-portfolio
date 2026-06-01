@@ -1349,7 +1349,9 @@
 
       if (hasIdentity) {
         try {
-          netlifyIdentity.init();
+          netlifyIdentity.init({
+            APIUrl: "https://evoadesign.netlify.app/.netlify/identity"
+          });
 
           // Check current user state
           const user = netlifyIdentity.currentUser();
