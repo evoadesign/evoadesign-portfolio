@@ -1386,32 +1386,39 @@
         btnLoginIdentity.addEventListener('click', () => {
           if (typeof netlifyIdentity !== 'undefined') {
             try {
-              netlifyIdentity.open('login');
+              netlifyIdentity.open();
             } catch (e) {
               alert("Erro ao abrir a janela de login do Netlify: " + e.message);
             }
           } else {
-            alert("O serviço de autenticação do Netlify não pôde ser carregado.\n\nProváveis causas:\n1. Falha de conexão com a internet.\n2. Uso de bloqueadores de anúncios/scripts no navegador.\n3. Acesso direto por arquivo local (file://). Certifique-se de servir a página sob um domínio HTTP/HTTPS.\n\nPor favor, recarregue a página ou utilize o botão 'Trabalhar Offline'.");
+            alert("O serviço de autenticação do Netlify não pôde ser carregado.\n\nProváveis causas:\n1. Falha de conexão com a internet.\n2. Uso de bloqueadores de anúncios/scripts no navegador.\n3. Acesso direto por arquivo local (file://). Certifique-se de servir a página sob um domínio HTTP/HTTPS.\n\nPor favor, recarregue a página.");
           }
         });
       }
 
+      // Hide "Trabalhar Offline" button on production for absolute security
+      const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "";
       const btnLoginOffline = document.getElementById('btn-login-offline');
       if (btnLoginOffline) {
-        btnLoginOffline.addEventListener('click', () => {
-          if (typeof netlifyIdentity !== 'undefined') {
-            try {
-              netlifyIdentity.close();
-            } catch (e) {}
-          }
-          offlineMode = true;
-          document.getElementById('login-screen').style.opacity = '0';
-          setTimeout(() => {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('editor-container').style.display = 'flex';
-            initializeDatabaseOffline();
-          }, 500);
-        });
+        if (isLocal) {
+          btnLoginOffline.style.display = 'block';
+          btnLoginOffline.addEventListener('click', () => {
+            if (typeof netlifyIdentity !== 'undefined') {
+              try {
+                netlifyIdentity.close();
+              } catch (e) {}
+            }
+            offlineMode = true;
+            document.getElementById('login-screen').style.opacity = '0';
+            setTimeout(() => {
+              document.getElementById('login-screen').style.display = 'none';
+              document.getElementById('editor-container').style.display = 'flex';
+              initializeDatabaseOffline();
+            }, 500);
+          });
+        } else {
+          btnLoginOffline.style.display = 'none';
+        }
       }
     };
 
