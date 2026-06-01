@@ -337,7 +337,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const initGlobalSettings = (settings) => {
     if (!settings) return;
 
-    // 0. Dynamic Favicon Management
+    // 0.0 Dynamic Style Customizer Settings (CSS Variables Override)
+    if (settings.styles) {
+      const styles = settings.styles;
+      if (styles.primaryColor) {
+        const hexToRgb = (hex) => {
+          const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+          return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+          } : null;
+        };
+        const rgb = hexToRgb(styles.primaryColor);
+        if (rgb) {
+          document.documentElement.style.setProperty('--color-primary', styles.primaryColor);
+          document.documentElement.style.setProperty('--color-primary-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`);
+          document.documentElement.style.setProperty('--color-border-glow', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.18)`);
+          
+          const intensity = styles.glowIntensity !== undefined ? styles.glowIntensity : 0.35;
+          document.documentElement.style.setProperty('--shadow-neon-glow', `0 0 20px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${intensity})`);
+          document.documentElement.style.setProperty('--shadow-neon-glow-strong', `0 0 35px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${intensity * 1.7})`);
+        }
+      }
+      if (styles.sectionPadding !== undefined) {
+        document.documentElement.style.setProperty('--section-padding', `${styles.sectionPadding}px`);
+      }
+      if (styles.gridGap !== undefined) {
+        document.documentElement.style.setProperty('--grid-gap', `${styles.gridGap}px`);
+      }
+    }
+
+    // 0.1 Dynamic Favicon Management
     if (settings.favicon) {
       let link = document.querySelector("link[rel~='icon']");
       if (!link) {
@@ -709,6 +740,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (slides.length > 0) {
     setInterval(showNextSlide, slideIntervalTime);
   }
+
+  // ==========================================================================
+  // 10. REAL-TIME LIVE PREVIEW CHANNEL (postMessage Listener for Visual Admin)
+  // ==========================================================================
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'PREVIEW_UPDATE') {
+      console.log('Visual Studio: Preview Update Received.', event.data);
+      const { settings, projects } = event.data;
+      if (settings) {
+        initGlobalSettings(settings);
+      }
+      if (projects) {
+        projectsData = {};
+        if (projects.items) {
+          projects.items.forEach(proj => {
+            projectsData[proj.id] = proj;
+          });
+          renderProjectsGrid(projects.items);
+        }
+      }
+    }
+  });
 
   // Brand introductory log in the console
   console.log(

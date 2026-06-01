@@ -17,6 +17,10 @@
   --color-border-glow: rgba(0, 154, 224, 0.18);/* Electric blue borders for active elements */
   --color-border-muted: rgba(255, 255, 255, 0.08); /* Soft white border for glass layouts */
   
+  /* Layout & Custom Spacing Variables (Adobe Portfolio Customizer) */
+  --section-padding: 120px;
+  --grid-gap: 40px;
+
   /* Fonts */
   --font-headings: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -697,7 +701,7 @@ button {
    MANIFESTO SECTION (Pure Black Contrast Block)
    ========================================================================== */
 .manifesto-agency-section {
-  padding: 120px 0;
+  padding: var(--section-padding) 0;
   background-color: #000000; /* Pure black contrast respiro */
   position: relative;
   overflow: hidden;
@@ -809,7 +813,7 @@ button {
    ========================================================================== */
 .services-agency-section {
   position: relative;
-  padding: 120px 0;
+  padding: var(--section-padding) 0;
   background-color: var(--color-bg-deep);
   overflow: hidden; /* Prevent glowing background leaks from overflowing on mobile */
 }
@@ -951,7 +955,7 @@ button {
    IMMERSIVE ASYMMETRICAL PROJECTS SECTION
    ========================================================================== */
 .projects-agency-section {
-  padding: 120px 0;
+  padding: var(--section-padding) 0;
   background-color: #090b0e; /* Deep graphite block for contrast shift */
 }
 
@@ -959,7 +963,7 @@ button {
 .projects-agency-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 60px 40px;
+  gap: calc(var(--grid-gap) * 1.5) var(--grid-gap);
 }
 
 @media (max-width: 768px) {
@@ -1088,7 +1092,7 @@ button {
 
 /* Project Section Offset Correction for padding bottom */
 .projects-agency-section {
-  padding-bottom: 180px;
+  padding-bottom: calc(var(--section-padding) * 1.5);
 }
 
 /* ==========================================================================
@@ -1234,7 +1238,7 @@ button {
    ========================================================================== */
 .contact-agency-section {
   position: relative;
-  padding: 120px 0;
+  padding: var(--section-padding) 0;
   background-color: var(--color-bg-deep);
   overflow: hidden; /* Prevent left glow leak from spilling off-screen */
 }
@@ -1600,7 +1604,7 @@ button {
    ========================================================================== */
 .faq-agency-section {
   position: relative;
-  padding: 120px 0;
+  padding: var(--section-padding) 0;
   background-color: var(--color-bg-deep);
   overflow: hidden;
 }
