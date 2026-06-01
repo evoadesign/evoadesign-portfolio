@@ -1335,43 +1335,67 @@
     // 1. INITIALIZATION & AUTHENTICATION (Netlify Identity)
     // ==========================================
     document.addEventListener("DOMContentLoaded", () => {
-      netlifyIdentity.init();
+      const hasIdentity = typeof netlifyIdentity !== 'undefined';
 
-      // Check current user state
-      const user = netlifyIdentity.currentUser();
-      if (user) {
-        handleUserLogin(user);
-      } else {
-        // Safe check for offline localhost development
-        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-          console.log("Studio Builder: Local development environment detected.");
+      if (hasIdentity) {
+        try {
+          netlifyIdentity.init();
+
+          // Check current user state
+          const user = netlifyIdentity.currentUser();
+          if (user) {
+            handleUserLogin(user);
+          } else {
+            // Safe check for offline localhost development
+            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+              console.log("Studio Builder: Local development environment detected.");
+            }
+          }
+
+          // Netlify Identity triggers
+          netlifyIdentity.on('login', user => {
+            netlifyIdentity.close();
+            handleUserLogin(user);
+          });
+
+          netlifyIdentity.on('logout', () => {
+            window.location.reload();
+          });
+        } catch (e) {
+          console.error("Erro na inicialização do Netlify Identity:", e);
         }
+      } else {
+        console.warn("Netlify Identity widget não foi carregado. Operando em modo de fallback offline.");
       }
 
-      // Netlify Identity triggers
-      netlifyIdentity.on('login', user => {
-        netlifyIdentity.close();
-        handleUserLogin(user);
-      });
-
-      netlifyIdentity.on('logout', () => {
-        window.location.reload();
-      });
-
       // Hook up UI Login Buttons
-      document.getElementById('btn-login-identity').addEventListener('click', () => {
-        netlifyIdentity.open();
-      });
+      const btnLoginIdentity = document.getElementById('btn-login-identity');
+      if (btnLoginIdentity) {
+        btnLoginIdentity.addEventListener('click', () => {
+          if (typeof netlifyIdentity !== 'undefined') {
+            try {
+              netlifyIdentity.open();
+            } catch (e) {
+              alert("Erro ao abrir a janela de login do Netlify: " + e.message);
+            }
+          } else {
+            alert("O serviço de autenticação do Netlify não pôde ser carregado.\n\nProváveis causas:\n1. Falha de conexão com a internet.\n2. Uso de bloqueadores de anúncios/scripts no navegador.\n3. Acesso direto por arquivo local (file://). Certifique-se de servir a página sob um domínio HTTP/HTTPS.\n\nPor favor, recarregue a página ou utilize o botão 'Trabalhar Offline'.");
+          }
+        });
+      }
 
-      document.getElementById('btn-login-offline').addEventListener('click', () => {
-        offlineMode = true;
-        document.getElementById('login-screen').style.opacity = '0';
-        setTimeout(() => {
-          document.getElementById('login-screen').style.display = 'none';
-          document.getElementById('editor-container').style.display = 'flex';
-          initializeDatabaseOffline();
-        }, 500);
-      });
+      const btnLoginOffline = document.getElementById('btn-login-offline');
+      if (btnLoginOffline) {
+        btnLoginOffline.addEventListener('click', () => {
+          offlineMode = true;
+          document.getElementById('login-screen').style.opacity = '0';
+          setTimeout(() => {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('editor-container').style.display = 'flex';
+            initializeDatabaseOffline();
+          }, 500);
+        });
+      }
     });
 
     const handleUserLogin = (user) => {
@@ -1391,7 +1415,7 @@
     };
 
     const logoutUser = () => {
-      if (netlifyIdentity.currentUser()) {
+      if (typeof netlifyIdentity !== 'undefined' && netlifyIdentity.currentUser()) {
         netlifyIdentity.logout();
       } else {
         window.location.reload();
@@ -2197,7 +2221,7 @@
         return;
       }
 
-      const user = netlifyIdentity.currentUser();
+      const user = typeof netlifyIdentity !== 'undefined' ? netlifyIdentity.currentUser() : null;
       if (!user) {
         alert("Usuário não autenticado. Por favor, faça login.");
         return;
