@@ -23,5 +23,44 @@
     "glowIntensity": 0.35,
     "sectionPadding": 120,
     "gridGap": 40
-  }
+  },
+  "clientsTitle": "Nossos Últimos Clientes e Colaborações",
+  "faqTag": "FAQ ESPECIALIZADO",
+  "faqTitle": "Dúvidas Frequentes",
+  "showClientsSection": true,
+  "showFaqSection": true,
+  "clients": [
+    { "name": "Stellantis", "imageUrl": "assets/images/clients/stellantis.svg" },
+    { "name": "CAIO Induscar", "imageUrl": "assets/images/clients/caio.svg" },
+    { "name": "RVTrans", "imageUrl": "assets/images/clients/rvtrans.svg" },
+    { "name": "Score Group", "imageUrl": "assets/images/clients/score.svg" },
+    { "name": "Nissan", "imageUrl": "assets/images/clients/nissan.svg" },
+    { "name": "Sovrano", "imageUrl": "assets/images/clients/sovrano.svg" }
+  ],
+  "faqs": [
+    {
+      "question": "O que é CGI de produto e quais suas vantagens em relação à fotografia tradicional?",
+      "answer": "O CGI (Computer Generated Imagery) para produto é a criação de representações digitais tridimensionais em alta definição com fotorrealismo matemático. As vantagens sobre a fotografia de estúdio são imensas: controle absoluto de iluminação (sem reflexos indesejados), possibilidade de alterar cores e materiais instantaneamente, visualização de produtos que ainda estão em fase de projeto ou prototipagem, e a inserção em cenários virtuais complexos sem os altos custos de cenografia física, otimizando o seu orçamento publicitário de forma extraordinária."
+    },
+    {
+      "question": "Como o CGI para Publicidade aumenta o impacto de campanhas e as vendas?",
+      "answer": "O CGI publicitário liberta a criatividade das barreiras físicas da produção real. Ele permite conceber conceitos cinematográficos impactantes que seriam caros ou impossíveis de filmar (como simulações dinâmicas de veículos em alta velocidade ou visões explodidas internas de motores de luxo). Ao apresentar produtos com uma qualidade visual impecável e dramática, ele retém a atenção do cliente em plataformas digitais por muito mais tempo, gerando um valor de marca superior e impulsionando as taxas de conversão de vendas."
+    },
+    {
+      "question": "Quanto tempo leva para produzir uma Animação 3D fotorrealista de produto?",
+      "answer": "O prazo varia de acordo com a complexidade, roteiro e duração do projeto. Uma animação padrão de produto de 15 a 30 segundos costuma levar entre 3 a 5 semanas. Esse processo inclui a criação do storyboard, modelagem dos assets em alta fidelidade com materiais fotorrealistas (Color, Material & Finish), animação de câmeras e fluidos, renderização digital e finalização artística (pós-produção e sound design). Trabalhamos com cronogramas transparentes para garantir entregas impecáveis."
+    },
+    {
+      "question": "O que é animação com IA e como a Inteligência Artificial é integrada aos seus projetos?",
+      "answer": "A animação com IA na evoadesign é a integração de ferramentas de redes neurais generativas avançadas diretamente nos fluxos de trabalho tradicionais de 3D e CGI. Usamos IA de ponta para acelerar a geração e o upscale de texturas procedurais hiper-realistas, criar interpolações de quadros (gerando maior fluidez de movimentos) e conceber moodboards artísticos e storyboards na fase de pré-produção. Isso potencializa o trabalho humano de direção, gerando prazos mais curtos e entregas com qualidade visual exponencial."
+    },
+    {
+      "question": "O estúdio realiza o Design de Produto (styling conceitual) ou apenas a renderização 3D?",
+      "answer": "A evoadesign vai muito além do render. Oferecemos serviços integrados de styling conceitual, refinamento estético e estudos de cores, materiais e acabamento (Color, Material & Finish - CMF) para produtos industriais. Colaboramos ativamente com designers e engenheiros para refinar as linhas do produto de forma que ele se comunique com o público de maneira premium e sofisticada, gerando um alinhamento perfeito entre estética, fabricação e publicidade final."
+    },
+    {
+      "question": "Como a Identidade Visual e o Design Gráfico são integrados ao CGI 3D?",
+      "answer": "Nossa abordagem é multidisciplinar. Projetamos sistemas de identidade visual, logotipos e designs de embalagens já concebidos dentro de softwares 3D. Isso significa que a sua identidade gráfica é testada instantaneamente sob simulações físicas de materiais (como papéis táteis texturizados, relevos dourados ou garrafas de vidro premium) e iluminação CGI. O resultado é um branding integrado perfeitamente coeso, que se destaca tanto no varejo físico quanto no e-commerce digital."
+    }
+  ]
 }

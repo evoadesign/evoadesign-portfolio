@@ -905,6 +905,61 @@
             <label class="form-label" for="about-description">Manifesto / Descrição Longa</label>
             <textarea class="form-control" id="about-description" rows="5" oninput="updateGlobalSettings()"></textarea>
           </div>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">Últimos Clientes e Logos</h2>
+
+          <div class="form-group">
+            <div class="switch-container">
+              <div class="switch-info">
+                <span class="form-label" style="margin-bottom: 0;">Exibir Seção de Clientes</span>
+                <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Exibe ou oculta todo o carrossel de clientes no site.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="show-clients-section" onchange="updateGlobalSettings()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="clients-title">Título da Seção de Clientes</label>
+            <input type="text" class="form-control" id="clients-title" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="project-list" id="clients-list-container">
+            <!-- Dynamic elements will be injected here -->
+          </div>
+          <button class="btn btn-secondary" onclick="openNewClientForm()">+ Adicionar Cliente</button>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">FAQ Especializado</h2>
+
+          <div class="form-group">
+            <div class="switch-container">
+              <div class="switch-info">
+                <span class="form-label" style="margin-bottom: 0;">Exibir Seção de FAQ</span>
+                <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Exibe ou oculta todo o bloco de dúvidas frequentes e o link do menu.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="show-faq-section" onchange="updateGlobalSettings()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="faq-tag">Tag da Seção de FAQ</label>
+            <input type="text" class="form-control" id="faq-tag" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="faq-title">Título da Seção de FAQ</label>
+            <input type="text" class="form-control" id="faq-title" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="project-list" id="faqs-list-container">
+            <!-- Dynamic elements will be injected here -->
+          </div>
+          <button class="btn btn-secondary" onclick="openNewFaqForm()">+ Adicionar Dúvida</button>
         </div>
 
         <!-- ========================================== -->
@@ -1152,6 +1207,49 @@
     <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeProjectForm()">Cancelar</button>
   </div>
 
+  <!-- Client Creator / Editor Overlay -->
+  <div class="subform-overlay" id="client-editor-overlay">
+    <div class="subform-header">
+      <h3 class="subform-title" id="client-subform-title">Editar Cliente</h3>
+      <button class="btn-icon btn-icon-danger" onclick="closeClientForm()">X</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="client-name">Nome do Cliente</label>
+      <input type="text" class="form-control" id="client-name" placeholder="ex: Stellantis">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="client-image">Caminho da Logo (SVG ou PNG)</label>
+      <input type="text" class="form-control" id="client-image" placeholder="ex: assets/images/clients/stellantis.svg">
+      <div class="form-desc">Nota: Logos coloridas serão automaticamente convertidas para vetor branco e escala de cinza no site para manter a harmonia estética do portfólio.</div>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top: 32px;" onclick="saveClientForm()">Confirmar Cliente</button>
+    <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeClientForm()">Cancelar</button>
+  </div>
+
+  <!-- FAQ Creator / Editor Overlay -->
+  <div class="subform-overlay" id="faq-editor-overlay">
+    <div class="subform-header">
+      <h3 class="subform-title" id="faq-subform-title">Editar Dúvida Frequente</h3>
+      <button class="btn-icon btn-icon-danger" onclick="closeFaqForm()">X</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="faq-question">Pergunta (Question)</label>
+      <input type="text" class="form-control" id="faq-question" placeholder="Escreva a dúvida frequente...">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="faq-answer">Resposta (Answer)</label>
+      <textarea class="form-control" id="faq-answer" rows="6" placeholder="Escreva a resposta detalhada..."></textarea>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top: 32px;" onclick="saveFaqForm()">Confirmar Dúvida</button>
+    <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeFaqForm()">Cancelar</button>
+  </div>
+
   <!-- 4. STATUS OVERLAY / LOADER PANEL -->
   <div id="status-overlay">
     <div class="status-box">
@@ -1169,6 +1267,8 @@
     let globalSettings = {};
     let projectsDatabase = { items: [] };
     let editingProjectId = null;
+    let editingClientId = null;
+    let editingFaqId = null;
     let offlineMode = false;
     let gitShaSettings = '';
     let gitShaProjects = '';
@@ -1317,6 +1417,13 @@
       document.getElementById('about-text').value = globalSettings.aboutText || '';
       document.getElementById('about-description').value = globalSettings.aboutDescription || '';
 
+      document.getElementById('clients-title').value = globalSettings.clientsTitle || 'Nossos Últimos Clientes e Colaborações';
+      document.getElementById('faq-tag').value = globalSettings.faqTag || 'FAQ ESPECIALIZADO';
+      document.getElementById('faq-title').value = globalSettings.faqTitle || 'Dúvidas Frequentes';
+
+      document.getElementById('show-clients-section').checked = globalSettings.showClientsSection !== false;
+      document.getElementById('show-faq-section').checked = globalSettings.showFaqSection !== false;
+
       // Contact Tab
       document.getElementById('contact-whatsapp').value = globalSettings.contactWhatsapp || '';
       document.getElementById('contact-email').value = globalSettings.contactEmail || '';
@@ -1341,6 +1448,10 @@
 
       // Render projects grid manager
       renderProjectsManagerList();
+
+      // Render clients and FAQs managers
+      renderClientsManagerList();
+      renderFaqsManagerList();
 
       // Trigger initial preview sync inside iframe
       setTimeout(sendPreviewUpdate, 1200);
@@ -1397,6 +1508,13 @@
       globalSettings.aboutTag = document.getElementById('about-tag').value;
       globalSettings.aboutText = document.getElementById('about-text').value;
       globalSettings.aboutDescription = document.getElementById('about-description').value;
+
+      globalSettings.clientsTitle = document.getElementById('clients-title').value;
+      globalSettings.faqTag = document.getElementById('faq-tag').value;
+      globalSettings.faqTitle = document.getElementById('faq-title').value;
+
+      globalSettings.showClientsSection = document.getElementById('show-clients-section').checked;
+      globalSettings.showFaqSection = document.getElementById('show-faq-section').checked;
 
       globalSettings.contactWhatsapp = document.getElementById('contact-whatsapp').value;
       globalSettings.contactEmail = document.getElementById('contact-email').value;
@@ -1499,6 +1617,205 @@
         }
       }
       globalSettings.socialLinks = newLinks;
+    };
+
+    // ==========================================
+    // 5.5 CLIENTS & FAQS MANAGERS
+    // ==========================================
+    const renderClientsManagerList = () => {
+      const container = document.getElementById('clients-list-container');
+      container.innerHTML = '';
+
+      if (!globalSettings.clients || globalSettings.clients.length === 0) {
+        container.innerHTML = '<div style="font-size: 11px; text-align: center; padding: 12px 0; color: var(--color-text-muted);">Nenhum cliente cadastrado.</div>';
+        return;
+      }
+
+      globalSettings.clients.forEach((client, idx) => {
+        container.insertAdjacentHTML('beforeend', `
+          <div class="project-item">
+            <div class="project-meta" style="max-width: 65%;">
+              <div class="project-meta-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${client.name || 'Sem nome'}</div>
+              <div class="project-meta-category" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${client.imageUrl || 'Sem logo'}</div>
+            </div>
+            
+            <div class="project-actions">
+              <button class="btn-icon" onclick="moveClientUp(${idx})" title="Subir na Lista">↑</button>
+              <button class="btn-icon" onclick="moveClientDown(${idx})" title="Descer na Lista">↓</button>
+              <button class="btn-icon" onclick="editClient(${idx})" title="Editar">✎</button>
+              <button class="btn-icon btn-icon-danger" onclick="deleteClient(${idx})" title="Excluir">🗑</button>
+            </div>
+          </div>
+        `);
+      });
+    };
+
+    const moveClientUp = (idx) => {
+      if (idx === 0) return;
+      const temp = globalSettings.clients[idx];
+      globalSettings.clients[idx] = globalSettings.clients[idx - 1];
+      globalSettings.clients[idx - 1] = temp;
+      renderClientsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const moveClientDown = (idx) => {
+      if (idx === globalSettings.clients.length - 1) return;
+      const temp = globalSettings.clients[idx];
+      globalSettings.clients[idx] = globalSettings.clients[idx + 1];
+      globalSettings.clients[idx + 1] = temp;
+      renderClientsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const deleteClient = (idx) => {
+      if (confirm(`Tem certeza que deseja excluir permanentemente a logo do cliente "${globalSettings.clients[idx].name}"?`)) {
+        globalSettings.clients.splice(idx, 1);
+        renderClientsManagerList();
+        sendPreviewUpdate();
+      }
+    };
+
+    const openNewClientForm = () => {
+      editingClientId = null;
+      document.getElementById('client-subform-title').textContent = 'Novo Cliente';
+      document.getElementById('client-name').value = '';
+      document.getElementById('client-image').value = '';
+      document.getElementById('client-editor-overlay').style.display = 'flex';
+    };
+
+    const editClient = (idx) => {
+      editingClientId = idx;
+      const client = globalSettings.clients[idx];
+      document.getElementById('client-subform-title').textContent = `Editar: ${client.name}`;
+      document.getElementById('client-name').value = client.name || '';
+      document.getElementById('client-image').value = client.imageUrl || '';
+      document.getElementById('client-editor-overlay').style.display = 'flex';
+    };
+
+    const closeClientForm = () => {
+      document.getElementById('client-editor-overlay').style.display = 'none';
+    };
+
+    const saveClientForm = () => {
+      const name = document.getElementById('client-name').value.trim();
+      const imageUrl = document.getElementById('client-image').value.trim();
+      if (!name) {
+        alert("O nome do cliente é obrigatório!");
+        return;
+      }
+
+      const newClient = { name, imageUrl };
+
+      if (!globalSettings.clients) globalSettings.clients = [];
+
+      if (editingClientId === null) {
+        globalSettings.clients.push(newClient);
+      } else {
+        globalSettings.clients[editingClientId] = newClient;
+      }
+
+      renderClientsManagerList();
+      sendPreviewUpdate();
+      closeClientForm();
+    };
+
+    const renderFaqsManagerList = () => {
+      const container = document.getElementById('faqs-list-container');
+      container.innerHTML = '';
+
+      if (!globalSettings.faqs || globalSettings.faqs.length === 0) {
+        container.innerHTML = '<div style="font-size: 11px; text-align: center; padding: 12px 0; color: var(--color-text-muted);">Nenhuma dúvida cadastrada.</div>';
+        return;
+      }
+
+      globalSettings.faqs.forEach((faq, idx) => {
+        container.insertAdjacentHTML('beforeend', `
+          <div class="project-item">
+            <div class="project-meta" style="max-width: 65%;">
+              <div class="project-meta-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${faq.question || 'Sem pergunta'}</div>
+              <div class="project-meta-category" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${faq.answer || 'Sem resposta'}</div>
+            </div>
+            
+            <div class="project-actions">
+              <button class="btn-icon" onclick="moveFaqUp(${idx})" title="Subir na Lista">↑</button>
+              <button class="btn-icon" onclick="moveFaqDown(${idx})" title="Descer na Lista">↓</button>
+              <button class="btn-icon" onclick="editFaq(${idx})" title="Editar">✎</button>
+              <button class="btn-icon btn-icon-danger" onclick="deleteFaq(${idx})" title="Excluir">🗑</button>
+            </div>
+          </div>
+        `);
+      });
+    };
+
+    const moveFaqUp = (idx) => {
+      if (idx === 0) return;
+      const temp = globalSettings.faqs[idx];
+      globalSettings.faqs[idx] = globalSettings.faqs[idx - 1];
+      globalSettings.faqs[idx - 1] = temp;
+      renderFaqsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const moveFaqDown = (idx) => {
+      if (idx === globalSettings.faqs.length - 1) return;
+      const temp = globalSettings.faqs[idx];
+      globalSettings.faqs[idx] = globalSettings.faqs[idx + 1];
+      globalSettings.faqs[idx + 1] = temp;
+      renderFaqsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const deleteFaq = (idx) => {
+      if (confirm(`Tem certeza que deseja excluir permanentemente a pergunta "${globalSettings.faqs[idx].question}"?`)) {
+        globalSettings.faqs.splice(idx, 1);
+        renderFaqsManagerList();
+        sendPreviewUpdate();
+      }
+    };
+
+    const openNewFaqForm = () => {
+      editingFaqId = null;
+      document.getElementById('faq-subform-title').textContent = 'Nova Dúvida Frequente';
+      document.getElementById('faq-question').value = '';
+      document.getElementById('faq-answer').value = '';
+      document.getElementById('faq-editor-overlay').style.display = 'flex';
+    };
+
+    const editFaq = (idx) => {
+      editingFaqId = idx;
+      const faq = globalSettings.faqs[idx];
+      document.getElementById('faq-subform-title').textContent = 'Editar Dúvida';
+      document.getElementById('faq-question').value = faq.question || '';
+      document.getElementById('faq-answer').value = faq.answer || '';
+      document.getElementById('faq-editor-overlay').style.display = 'flex';
+    };
+
+    const closeFaqForm = () => {
+      document.getElementById('faq-editor-overlay').style.display = 'none';
+    };
+
+    const saveFaqForm = () => {
+      const question = document.getElementById('faq-question').value.trim();
+      const answer = document.getElementById('faq-answer').value.trim();
+      if (!question || !answer) {
+        alert("Ambos pergunta e resposta são obrigatórios!");
+        return;
+      }
+
+      const newFaq = { question, answer };
+
+      if (!globalSettings.faqs) globalSettings.faqs = [];
+
+      if (editingFaqId === null) {
+        globalSettings.faqs.push(newFaq);
+      } else {
+        globalSettings.faqs[editingFaqId] = newFaq;
+      }
+
+      renderFaqsManagerList();
+      sendPreviewUpdate();
+      closeFaqForm();
     };
 
     // ==========================================

@@ -300,17 +300,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 7. FAQ ACCORDION INTERACTIVE TOGGLE
+  // 7. FAQ ACCORDION INTERACTIVE TOGGLE (Event Delegation for Dynamic Content)
   // ==========================================================================
-  const faqHeaders = document.querySelectorAll('.faq-accordion-header');
+  const faqContainer = document.getElementById('faq-accordion-container');
+  if (faqContainer) {
+    faqContainer.addEventListener('click', (e) => {
+      const header = e.target.closest('.faq-accordion-header');
+      if (!header) return;
 
-  faqHeaders.forEach(header => {
-    header.addEventListener('click', () => {
       const item = header.parentElement;
       const isActive = item.classList.contains('active');
 
       // Close all other accordion items (Classic Accordion)
-      document.querySelectorAll('.faq-accordion-item').forEach(otherItem => {
+      faqContainer.querySelectorAll('.faq-accordion-item').forEach(otherItem => {
         if (otherItem !== item) {
           otherItem.classList.remove('active');
           otherItem.querySelector('.faq-accordion-header').setAttribute('aria-expanded', 'false');
@@ -326,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
         header.setAttribute('aria-expanded', 'true');
       }
     });
-  });
+  }
 
   // ==========================================================================
   // 8. CINEMATIC PROJECT DRAWER SYSTEM & DYNAMIC DATABASE FETCH
@@ -480,6 +482,98 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }).join('');
     }
+
+    // 5. Render dynamic client logos
+    renderClients(settings.clients, settings.showClientsSection !== false);
+
+    // 6. Render dynamic FAQ accordion
+    renderFaqAccordion(settings.faqs, settings.showFaqSection !== false);
+
+    // 7. Render dynamic section headers for Clients and FAQ
+    const clientsTitleEl = document.getElementById('clients-section-title-display');
+    if (clientsTitleEl) {
+      clientsTitleEl.textContent = settings.clientsTitle || 'Nossos Últimos Clientes e Colaborações';
+    }
+    const faqTagEl = document.getElementById('faq-section-tag-display');
+    if (faqTagEl) {
+      faqTagEl.textContent = settings.faqTag || 'FAQ ESPECIALIZADO';
+    }
+    const faqTitleEl = document.getElementById('faq-section-title-display');
+    if (faqTitleEl) {
+      faqTitleEl.textContent = settings.faqTitle || 'Dúvidas Frequentes';
+    }
+  };
+
+  const renderClients = (clients, showSection) => {
+    const container = document.getElementById('marquee-content-container');
+    if (!container) return;
+    
+    const section = document.getElementById('clientes');
+    if (!showSection || !clients || clients.length === 0) {
+      container.innerHTML = '';
+      if (section) section.style.display = 'none';
+      return;
+    }
+    if (section) section.style.display = '';
+    
+    // We duplicate the list to make infinite scroll marquee seamless
+    const doubleList = [...clients, ...clients];
+    container.innerHTML = doubleList.map(client => `
+      <div class="client-logo-item">
+        <img src="${client.imageUrl}" alt="${client.name}" class="client-logo-img">
+      </div>
+    `).join('');
+  };
+
+  const renderFaqAccordion = (faqs, showSection) => {
+    const container = document.getElementById('faq-accordion-container');
+    if (!container) return;
+    
+    const section = document.getElementById('faq');
+    const faqLinks = document.querySelectorAll('a[href="#faq"]');
+    
+    if (!showSection || !faqs || faqs.length === 0) {
+      container.innerHTML = '';
+      if (section) section.style.display = 'none';
+      faqLinks.forEach(link => {
+        const parentLi = link.closest('li');
+        if (parentLi) {
+          parentLi.style.display = 'none';
+        } else {
+          link.style.display = 'none';
+        }
+      });
+      return;
+    }
+    
+    if (section) section.style.display = '';
+    faqLinks.forEach(link => {
+      const parentLi = link.closest('li');
+      if (parentLi) {
+        parentLi.style.display = '';
+      } else {
+        link.style.display = '';
+      }
+    });
+    
+    container.innerHTML = faqs.map(faq => `
+      <div class="faq-accordion-item">
+        <button class="faq-accordion-header" aria-expanded="false">
+          <h3>${faq.question}</h3>
+          <div class="faq-icon-toggle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19" class="toggle-line-v"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </div>
+        </button>
+        <div class="faq-accordion-body">
+          <div class="faq-accordion-content">
+            <p>${faq.answer}</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
   };
 
   const renderProjectsGrid = (projects) => {
