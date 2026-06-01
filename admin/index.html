@@ -1391,10 +1391,10 @@
     };
 
     const logoutUser = () => {
-      if (offlineMode) {
-        window.location.reload();
-      } else {
+      if (netlifyIdentity.currentUser()) {
         netlifyIdentity.logout();
+      } else {
+        window.location.reload();
       }
     };
 
@@ -1434,7 +1434,12 @@
         })
         .catch(err => {
           console.error("Error loading files through Git Gateway:", err);
-          showStatusError("Falha ao comunicar com o Git Gateway. Trabalhando com arquivos locais no modo offline.");
+          const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+          if (isLocal) {
+            console.log("Git Gateway not available on localhost. Silently falling back to offline mode.");
+          } else {
+            showStatusError("Falha ao comunicar com o Git Gateway. Trabalhando com arquivos locais no modo offline.");
+          }
           offlineMode = true;
           initializeDatabaseOffline();
         });
