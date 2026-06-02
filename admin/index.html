@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Netlify Identity Widget -->
-  <meta name="netlify-identity-widget" content="https://evoadesign.netlify.app">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
@@ -1357,7 +1356,16 @@
 
       if (hasIdentity) {
         try {
-          netlifyIdentity.init();
+          const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "";
+          if (isLocal) {
+            netlifyIdentity.init({
+              APIUrl: 'https://evoadesign.com.br/.netlify/identity'
+            });
+          } else {
+            // Remove cached site URL to force auto-detection of the current domain
+            localStorage.removeItem('netlifySiteURL');
+            netlifyIdentity.init();
+          }
 
           // Check current user state
           const user = netlifyIdentity.currentUser();
