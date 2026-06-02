@@ -1,530 +1,2409 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>evoadesign | Estúdio de Design, CGI de Alta Fidelidade e Identidade Visual</title>
-  <meta name="description" content="A evoadesign une sensibilidade artística e rigor técnico para traduzir ideias complexas em imagens CGI fotorrealistas e soluções visuais integradas de altíssimo impacto.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>EVOA Studio Builder | Painel Visual</title>
   
-  <!-- Google Fonts: Outfit (modern geometric headings) and Plus Jakarta Sans (body copy) -->
+  <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="index.css">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/FAVICON.png">
-
-  <!-- Netlify Identity Widget (Required for Netlify Git Gateway authentication) -->
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <!-- Structured Data JSON-LD for FAQPage (SEO Best Practice) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "O que é CGI de produto e quais suas vantagens em relação à fotografia tradicional?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "O CGI (Computer Generated Imagery) para produto é a criação de imagens digitais fotorrealistas em 3D. Em relação à fotografia convencional, o CGI oferece controle absoluto sobre iluminação, reflexos, materiais e ângulos. Ele permite visualizar produtos antes de serem fabricados, realizar alterações instantâneas e criar ambientes tridimensionais complexos sem custos de cenografia física, multiplicando a flexibilidade e reduzindo custos operacionais."
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME DEFINITIONS
+       ========================================================================== */
+    :root {
+      --color-bg-deep: #07080a;
+      --color-bg-panel: #0d0f12;
+      --color-bg-panel-elevated: #16191f;
+      --color-white: #ffffff;
+      --color-primary: #009ae0;
+      --color-primary-rgb: 0, 154, 224;
+      --color-primary-hover: #0082be;
+      --color-text-bright: #f1f5f9;
+      --color-text-muted: #94a3b8;
+      --color-border-glow: rgba(0, 154, 224, 0.2);
+      --color-border-muted: rgba(255, 255, 255, 0.08);
+      --shadow-neon: 0 0 20px rgba(0, 154, 224, 0.25);
+      --shadow-neon-strong: 0 0 35px rgba(0, 154, 224, 0.5);
+      --font-family: 'Plus Jakarta Sans', sans-serif;
+      --font-headings: 'Outfit', sans-serif;
+      --transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg-deep);
+      color: var(--color-text-muted);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ==========================================================================
+       LOGIN FRAME aesthetic
+       ========================================================================== */
+    #login-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #10141d 0%, #07080a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 24px;
+      transition: opacity 0.5s ease;
+    }
+
+    .login-card {
+      background: rgba(13, 15, 18, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--color-border-glow);
+      padding: 48px;
+      border-radius: 24px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .login-logo {
+      font-family: var(--font-headings);
+      font-weight: 800;
+      font-size: 32px;
+      letter-spacing: 4px;
+      color: var(--color-white);
+      margin-bottom: 8px;
+    }
+
+    .login-logo span {
+      color: var(--color-primary);
+      text-shadow: var(--shadow-neon);
+    }
+
+    .login-subtitle {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .login-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .login-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      box-shadow: var(--shadow-neon);
+      transition: var(--transition);
+      margin-bottom: 12px;
+    }
+
+    .login-btn:hover {
+      background-color: var(--color-primary-hover);
+      box-shadow: var(--shadow-neon-strong);
+      transform: translateY(-2px);
+    }
+
+    .login-btn-offline {
+      background: transparent;
+      border: 1px solid var(--color-border-muted);
+      color: var(--color-text-muted);
+    }
+
+    .login-btn-offline:hover {
+      border-color: var(--color-text-muted);
+      color: var(--color-text-bright);
+    }
+
+    /* ==========================================================================
+       MAIN EDITOR WRAPPER
+       ========================================================================== */
+    #editor-container {
+      display: none;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Left Sidebar */
+    .sidebar {
+      width: 400px;
+      background-color: var(--color-bg-panel);
+      border-right: 1px solid var(--color-border-muted);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--color-border-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-headings);
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--color-white);
+    }
+
+    .brand-title span {
+      color: var(--color-primary);
+    }
+
+    .brand-subtitle {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* Tab Controls */
+    .tab-nav {
+      display: flex;
+      overflow-x: auto;
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid var(--color-border-muted);
+      scrollbar-width: none;
+    }
+    .tab-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      padding: 16px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover {
+      color: var(--color-text-bright);
+    }
+
+    .tab-btn.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      text-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.2);
+    }
+
+    /* Scrollable Fields Container */
+    .tab-content-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form Fields Styling */
+    .form-section-title {
+      font-family: var(--font-headings);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-bright);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+      border-bottom: 1px dashed var(--color-border-muted);
+      padding-bottom: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-bright);
+      margin-bottom: 8px;
+    }
+
+    .form-desc {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background-color: var(--color-bg-panel-elevated);
+      border: 1px solid var(--color-border-muted);
+      border-radius: 8px;
+      color: var(--color-text-bright);
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.1);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Switch Component */
+    .switch-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-bg-panel-elevated);
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border-muted);
+    }
+
+    .switch-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #242a35;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--color-primary);
+      box-shadow: var(--shadow-neon);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Slider Component (Breathing margins, gaps) */
+    .range-value-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .range-value {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .range-control {
+      width: 100%;
+      height: 6px;
+      background: #242a35;
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .range-control::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      box-shadow: var(--shadow-neon);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .range-control::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Color Picker */
+    .color-picker-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .color-picker {
+      -webkit-appearance: none;
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      cursor: pointer;
+      background: none;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1.5px solid var(--color-border-muted);
+    }
+
+    .color-picker::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    .color-picker::-webkit-color-swatch {
+      border: none;
+      border-radius: 10px;
+    }
+
+    /* Project List Styling */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .project-item {
+      background-color: var(--color-bg-panel-elevated);
+      border: 1px solid var(--color-border-muted);
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .project-item:hover {
+      border-color: rgba(var(--color-primary-rgb), 0.4);
+    }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .project-meta-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-bright);
+    }
+
+    .project-meta-category {
+      font-size: 11px;
+      color: var(--color-text-muted);
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--color-border-muted);
+      border-radius: 6px;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-icon:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-neon);
+    }
+
+    .btn-icon-danger:hover {
+      background: #ef4444;
+      color: var(--color-white);
+      border-color: #ef4444;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Sub-form Overlay inside Sidebar */
+    .subform-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-bg-panel);
+      z-index: 105;
+      display: none;
+      flex-direction: column;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .subform-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .subform-title {
+      font-family: var(--font-headings);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text-bright);
+    }
+
+    /* Dynamic Lists inside project creator */
+    .dynamic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .dynamic-item {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Action Buttons */
+    .sidebar-footer {
+      padding: 24px;
+      border-top: 1px solid var(--color-border-muted);
+      background-color: rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      box-shadow: var(--shadow-neon);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--color-primary-hover);
+      box-shadow: var(--shadow-neon-strong);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border-muted);
+      color: var(--color-text-muted);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background-color: rgba(255, 255, 255, 0.06);
+      color: var(--color-text-bright);
+      border-color: var(--color-text-muted);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* User Profile footer info */
+    .user-profile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--color-text-muted);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-avatar {
+      width: 20px;
+      height: 20px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 10px;
+    }
+
+    .btn-logout {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-logout:hover {
+      color: #ef4444;
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       RIGHT PREVIEW PANEL
+       ========================================================================== */
+    .preview-pane {
+      flex: 1;
+      background-color: var(--color-bg-deep);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+
+    .preview-header {
+      height: 60px;
+      background-color: var(--color-bg-panel);
+      border-bottom: 1px solid var(--color-border-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      flex-shrink: 0;
+    }
+
+    .preview-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-viewport {
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--color-border-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-viewport:hover, .btn-viewport.active {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+      background-color: rgba(var(--color-primary-rgb), 0.05);
+    }
+
+    .iframe-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      background-color: #000;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Viewport widths */
+    #preview-iframe.viewport-desktop {
+      width: 100%;
+    }
+
+    #preview-iframe.viewport-tablet {
+      width: 768px;
+    }
+
+    #preview-iframe.viewport-mobile {
+      width: 375px;
+    }
+
+    /* Modal Backdrop / Overlay for saving updates */
+    #status-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 8, 10, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .status-box {
+      background-color: var(--color-bg-panel);
+      border: 1px solid var(--color-border-glow);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-neon);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--color-border-muted);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .status-title {
+      font-family: var(--font-headings);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+
+    /* Responsive Mobile styling for editor drawer */
+    @media (max-width: 900px) {
+      #editor-container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: 60%;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border-muted);
+      }
+      .preview-pane {
+        height: 40%;
+      }
+      .preview-header {
+        display: none; /* Hide header controls to fit screen space */
+      }
+      .iframe-wrapper {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. LOGIN SCREEN -->
+  <div id="login-screen">
+    <div id="global-error-banner" style="display: none; background: rgba(239, 68, 68, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 16px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; max-width: 440px; width: 100%; text-align: left; line-height: 1.5; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);"></div>
+    <div class="login-card">
+      <h1 class="login-logo">EVOA<span>.</span></h1>
+      <div class="login-subtitle">Studio Builder</div>
+      <p class="login-desc">Entre com sua conta Netlify para acessar o editor em tempo real e publicar alterações no site.</p>
+      
+      <button class="login-btn" id="btn-login-identity">Fazer Login</button>
+      <button class="login-btn login-btn-offline" id="btn-login-offline">Trabalhar Offline</button>
+      
+      <div style="font-size: 9px; color: var(--color-text-muted); margin-top: 24px; letter-spacing: 1px; text-transform: uppercase;">Build 2026.06.01.06 (Meta Tag Link)</div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN EDITOR CONTAINER -->
+  <div id="editor-container">
+    <!-- Left Sidebar: Builder Forms -->
+    <div class="sidebar">
+      
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="brand-title">EVOA<span>.</span></div>
+          <div class="brand-subtitle">Studio Builder</div>
+        </div>
+      </div>
+
+      <!-- Tab selectors -->
+      <div class="tab-nav">
+        <div class="tab-btn active" onclick="switchTab('tab-design')">Estilo</div>
+        <div class="tab-btn" onclick="switchTab('tab-hero')">Apresentação</div>
+        <div class="tab-btn" onclick="switchTab('tab-projects')">Projetos</div>
+        <div class="tab-btn" onclick="switchTab('tab-geral')">Geral</div>
+        <div class="tab-btn" onclick="switchTab('tab-footer')">Contato</div>
+      </div>
+
+      <!-- Content area (scrollable fields) -->
+      <div class="tab-content-container">
+        
+        <!-- ========================================== -->
+        <!-- TAB: ESTILO / DESIGN                       -->
+        <!-- ========================================== -->
+        <div class="tab-pane active" id="tab-design">
+          <h2 class="form-section-title">Paleta de Cores</h2>
+          
+          <div class="form-group">
+            <label class="form-label">Cor de Destaque (Accent Color)</label>
+            <div class="form-desc">Muda a cor de todos os detalhes, links e brilhos dinamicamente.</div>
+            <div class="color-picker-group">
+              <input type="color" class="color-picker" id="style-primary-color" value="#009ae0" oninput="updateStyleSettings()">
+              <input type="text" class="form-control" id="style-primary-color-text" value="#009ae0" placeholder="#009ae0" style="text-transform: uppercase;" oninput="updateStyleSettingsHex(this.value)">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="range-value-container">
+              <label class="form-label">Intensidade do Brilho (Glow)</label>
+              <span class="range-value" id="style-glow-val">35%</span>
+            </div>
+            <input type="range" class="range-control" id="style-glow-intensity" min="0" max="1" step="0.05" value="0.35" oninput="updateStyleSettings()">
+          </div>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">Espaçamentos</h2>
+          
+          <div class="form-group">
+            <div class="range-value-container">
+              <label class="form-label">Respiração das Seções (Padding)</label>
+              <span class="range-value" id="style-padding-val">120px</span>
+            </div>
+            <input type="range" class="range-control" id="style-section-padding" min="40" max="180" step="10" value="120" oninput="updateStyleSettings()">
+          </div>
+
+          <div class="form-group">
+            <div class="range-value-container">
+              <label class="form-label">Distância dos Projetos (Card Gap)</label>
+              <span class="range-value" id="style-gap-val">40px</span>
+            </div>
+            <input type="range" class="range-control" id="style-grid-gap" min="10" max="80" step="5" value="40" oninput="updateStyleSettings()">
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB: HERO & MANIFESTO                      -->
+        <!-- ========================================== -->
+        <div class="tab-pane" id="tab-hero">
+          <h2 class="form-section-title">Hero Section</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="hero-subtitle">Subtítulo do Hero</label>
+            <input type="text" class="form-control" id="hero-subtitle" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="hero-title">Título Principal (HTML Suportado)</label>
+            <textarea class="form-control" id="hero-title" rows="3" oninput="updateGlobalSettings()"></textarea>
+            <div class="form-desc">Dica: Use <code>&lt;span class="text-primary"&gt;texto&lt;/span&gt;</code> para colorir com a cor destaque, e <code>&lt;span class="text-glow"&gt;texto&lt;/span&gt;</code> para aplicar o glow.</div>
+          </div>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">Sobre & Manifesto</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="about-tag">Tag do Manifesto</label>
+            <input type="text" class="form-control" id="about-tag" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="about-text">Texto Grande do Sobre</label>
+            <textarea class="form-control" id="about-text" rows="4" oninput="updateGlobalSettings()"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="about-description">Manifesto / Descrição Longa</label>
+            <textarea class="form-control" id="about-description" rows="5" oninput="updateGlobalSettings()"></textarea>
+          </div>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">Destaques / Credenciais</h2>
+
+          <div class="form-group">
+            <div class="switch-container">
+              <div class="switch-info">
+                <span class="form-label" style="margin-bottom: 0;">Exibir Seção de Destaques</span>
+                <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Exibe ou oculta a linha inteira de cards de destaques no Sobre.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="show-credentials-section" onchange="updateGlobalSettings()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="project-list" id="credentials-list-container">
+            <!-- Dynamic elements will be injected here -->
+          </div>
+          <button class="btn btn-secondary" onclick="openNewCredentialForm()" style="margin-bottom: 32px;">+ Adicionar Destaque</button>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">Últimos Clientes e Logos</h2>
+
+          <div class="form-group">
+            <div class="switch-container">
+              <div class="switch-info">
+                <span class="form-label" style="margin-bottom: 0;">Exibir Seção de Clientes</span>
+                <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Exibe ou oculta todo o carrossel de clientes no site.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="show-clients-section" onchange="updateGlobalSettings()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="clients-title">Título da Seção de Clientes</label>
+            <input type="text" class="form-control" id="clients-title" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="project-list" id="clients-list-container">
+            <!-- Dynamic elements will be injected here -->
+          </div>
+          <button class="btn btn-secondary" onclick="openNewClientForm()">+ Adicionar Cliente</button>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">FAQ Especializado</h2>
+
+          <div class="form-group">
+            <div class="switch-container">
+              <div class="switch-info">
+                <span class="form-label" style="margin-bottom: 0;">Exibir Seção de FAQ</span>
+                <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Exibe ou oculta todo o bloco de dúvidas frequentes e o link do menu.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="show-faq-section" onchange="updateGlobalSettings()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="faq-tag">Tag da Seção de FAQ</label>
+            <input type="text" class="form-control" id="faq-tag" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="faq-title">Título da Seção de FAQ</label>
+            <input type="text" class="form-control" id="faq-title" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="project-list" id="faqs-list-container">
+            <!-- Dynamic elements will be injected here -->
+          </div>
+          <button class="btn btn-secondary" onclick="openNewFaqForm()">+ Adicionar Dúvida</button>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB: GERENCIADOR DE PROJETOS               -->
+        <!-- ========================================== -->
+        <div class="tab-pane" id="tab-projects">
+          <h2 class="form-section-title">Grade do Portfólio</h2>
+          
+          <div class="project-list" id="project-list-container">
+            <!-- Dynamic elements will be injected here -->
+          </div>
+
+          <button class="btn btn-secondary" onclick="openNewProjectForm()">+ Adicionar Novo Projeto</button>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB: CONFIGURAÇÕES GERAIS                  -->
+        <!-- ========================================== -->
+        <div class="tab-pane" id="tab-geral">
+          <h2 class="form-section-title">Configurações de SEO</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="seo-title">Título do Site (SEO Title)</label>
+            <input type="text" class="form-control" id="seo-title" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="seo-description">Descrição do Site (Meta Description)</label>
+            <textarea class="form-control" id="seo-description" rows="4" oninput="updateGlobalSettings()"></textarea>
+          </div>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">Segurança & Favicon</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="favicon-path">Favicon (Ícone de Abas)</label>
+            <input type="text" class="form-control" id="favicon-path" placeholder="ex: assets/images/FAVICON.png" oninput="updateGlobalSettings()">
+            <div class="form-desc">Caminho da imagem do favicon no projeto.</div>
+          </div>
+
+          <div class="form-group">
+            <div class="switch-container">
+              <div class="switch-info">
+                <span class="form-label" style="margin-bottom: 0;">Bloquear Cópia de Imagens</span>
+                <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Desativa clique direito e arrastar imagens.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="disable-image-save" onchange="updateGlobalSettings()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB: CONTATO & FOOTER                      -->
+        <!-- ========================================== -->
+        <div class="tab-pane" id="tab-footer">
+          <h2 class="form-section-title">Contatos Rápidos</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="contact-whatsapp">WhatsApp Oficial</label>
+            <input type="text" class="form-control" id="contact-whatsapp" placeholder="+55 (19) 99999-9999" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-email">E-mail Comercial</label>
+            <input type="email" class="form-control" id="contact-email" oninput="updateGlobalSettings()">
+          </div>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">Institucional (Footer)</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="footer-cnpj">CNPJ</label>
+            <input type="text" class="form-control" id="footer-cnpj" placeholder="00.000.000/0001-00" oninput="updateGlobalSettings()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="footer-razao">Razão Social</label>
+            <input type="text" class="form-control" id="footer-razao" oninput="updateGlobalSettings()">
+          </div>
+
+          <h2 class="form-section-title" style="margin-top: 32px;">Redes Sociais</h2>
+          
+          <div class="dynamic-list" id="social-links-list">
+            <!-- Dynamic platforms inputs -->
+          </div>
+          <button class="btn btn-secondary" style="padding: 10px; font-size: 11px;" onclick="addSocialPlatform()">+ Adicionar Rede Social</button>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons Footer -->
+      <div class="sidebar-footer">
+        <button class="btn btn-primary" id="btn-save" onclick="saveChanges()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          Publicar no Site Ativo
+        </button>
+        <button class="btn btn-secondary" id="btn-backup" onclick="downloadJSONBackup()">
+          Baixar Arquivos JSON
+        </button>
+
+        <div class="user-profile" id="user-profile-bar">
+          <div class="user-info">
+            <span class="user-avatar" id="user-avatar">?</span>
+            <span id="user-name-display">Offline</span>
+          </div>
+          <button class="btn-logout" id="btn-logout" onclick="logoutUser()">Sair</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Preview Panel: Live Iframe -->
+    <div class="preview-pane">
+      <div class="preview-header">
+        <div style="font-size: 12px; font-weight: 700; color: var(--color-white);">PREVIEW EM TEMPO REAL</div>
+        
+        <div class="preview-controls">
+          <button class="btn-viewport active" onclick="switchViewport('desktop', this)">
+            Desktop
+          </button>
+          <button class="btn-viewport" onclick="switchViewport('tablet', this)">
+            Tablet
+          </button>
+          <button class="btn-viewport" onclick="switchViewport('mobile', this)">
+            Mobile
+          </button>
+        </div>
+      </div>
+
+      <div class="iframe-wrapper">
+        <iframe id="preview-iframe" class="viewport-desktop" src="../index.html?preview=true"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SUB-FORM: PROJECT CREATOR / EDITOR (Slides up inside sidebar) -->
+  <div class="subform-overlay" id="project-editor-overlay">
+    <div class="subform-header">
+      <h3 class="subform-title" id="project-subform-title">Editar Projeto</h3>
+      <button class="btn-icon btn-icon-danger" onclick="closeProjectForm()">X</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-id">ID Único (ID Numérico)</label>
+      <input type="text" class="form-control" id="proj-id" placeholder="ex: 1, 2, 3">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-title">Título do Projeto</label>
+      <input type="text" class="form-control" id="proj-title" placeholder="Nome do carro, produto, etc.">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-category">Categoria</label>
+      <input type="text" class="form-control" id="proj-category" placeholder="ex: CGI Automotivo, CGI de Produto">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-client">Cliente</label>
+      <input type="text" class="form-control" id="proj-client" placeholder="ex: Nissan, Jeep, Autoral">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-year">Ano</label>
+      <input type="text" class="form-control" id="proj-year" placeholder="ex: 2026">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-tools">Softwares / Ferramentas</label>
+      <input type="text" class="form-control" id="proj-tools" placeholder="ex: 3ds Max, VRED, Photoshop, AI">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-short">Descrição Curta (Grade Principal)</label>
+      <input type="text" class="form-control" id="proj-short">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-description">Descrição Técnica Completa (Gaveta)</label>
+      <textarea class="form-control" id="proj-description" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-thumbnail">Capa do Projeto (Caminho da Imagem)</label>
+      <input type="text" class="form-control" id="proj-thumbnail" placeholder="ex: assets/images/Lamborghini/CAPA.png">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="proj-video">Vídeo Incorporado (Iframe Vimeo/YouTube - Opcional)</label>
+      <textarea class="form-control" id="proj-video" rows="3" placeholder='&lt;iframe src="https://player.vimeo.com/...&gt;&lt;/iframe&gt;'></textarea>
+    </div>
+
+    <!-- Toggle: Concept Section -->
+    <div class="form-group">
+      <div class="switch-container">
+        <div class="switch-info">
+          <span class="form-label" style="margin-bottom: 0;">Seção: Conceito & Styling</span>
+          <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Ativa os destaques de conceito na gaveta.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="proj-show-concept" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- List: Concept highlights -->
+    <div class="form-group">
+      <label class="form-label">Lista de Destaques de Conceito</label>
+      <div class="dynamic-list" id="proj-concept-list"></div>
+      <button class="btn btn-secondary" style="padding: 10px; font-size: 11px;" onclick="addConceptHighlight()">+ Adicionar Destaque</button>
+    </div>
+
+    <!-- Toggle: CMF Section -->
+    <div class="form-group">
+      <div class="switch-container">
+        <div class="switch-info">
+          <span class="form-label" style="margin-bottom: 0;">Seção: CMF & Materiais</span>
+          <span class="form-desc" style="margin-bottom: 0; font-size: 10px;">Ativa as especificações de CMF na gaveta.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="proj-show-cmf" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- List: CMF highlights -->
+    <div class="form-group">
+      <label class="form-label">Lista de Destaques de CMF</label>
+      <div class="dynamic-list" id="proj-cmf-list"></div>
+      <button class="btn btn-secondary" style="padding: 10px; font-size: 11px;" onclick="addCmfHighlight()">+ Adicionar CMF</button>
+    </div>
+
+    <!-- List: Gallery Renders -->
+    <div class="form-group" style="margin-top: 24px;">
+      <label class="form-label">Galeria de Renders (Imagens & GIFs)</label>
+      <div class="form-desc">Lista de caminhos de imagens em alta resolução do projeto.</div>
+      <div class="dynamic-list" id="proj-gallery-list"></div>
+      <button class="btn btn-secondary" style="padding: 10px; font-size: 11px;" onclick="addGalleryImage()">+ Adicionar Render à Galeria</button>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top: 32px;" onclick="saveProjectForm()">Confirmar Projeto</button>
+    <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeProjectForm()">Cancelar</button>
+  </div>
+
+  <!-- Client Creator / Editor Overlay -->
+  <div class="subform-overlay" id="client-editor-overlay">
+    <div class="subform-header">
+      <h3 class="subform-title" id="client-subform-title">Editar Cliente</h3>
+      <button class="btn-icon btn-icon-danger" onclick="closeClientForm()">X</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="client-name">Nome do Cliente</label>
+      <input type="text" class="form-control" id="client-name" placeholder="ex: Stellantis">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="client-image">Caminho da Logo (SVG ou PNG)</label>
+      <input type="text" class="form-control" id="client-image" placeholder="ex: assets/images/clients/stellantis.svg">
+      <div class="form-desc">Nota: Logos coloridas serão automaticamente convertidas para vetor branco e escala de cinza no site para manter a harmonia estética do portfólio.</div>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top: 32px;" onclick="saveClientForm()">Confirmar Cliente</button>
+    <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeClientForm()">Cancelar</button>
+  </div>
+
+  <!-- FAQ Creator / Editor Overlay -->
+  <div class="subform-overlay" id="faq-editor-overlay">
+    <div class="subform-header">
+      <h3 class="subform-title" id="faq-subform-title">Editar Dúvida Frequente</h3>
+      <button class="btn-icon btn-icon-danger" onclick="closeFaqForm()">X</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="faq-question">Pergunta (Question)</label>
+      <input type="text" class="form-control" id="faq-question" placeholder="Escreva a dúvida frequente...">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="faq-answer">Resposta (Answer)</label>
+      <textarea class="form-control" id="faq-answer" rows="6" placeholder="Escreva a resposta detalhada..."></textarea>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top: 32px;" onclick="saveFaqForm()">Confirmar Dúvida</button>
+    <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeFaqForm()">Cancelar</button>
+  </div>
+
+  <!-- Credential Creator / Editor Overlay -->
+  <div class="subform-overlay" id="credential-editor-overlay">
+    <div class="subform-header">
+      <h3 class="subform-title" id="credential-subform-title">Editar Destaque</h3>
+      <button class="btn-icon btn-icon-danger" onclick="closeCredentialForm()">X</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="cred-title">Título do Destaque</label>
+      <input type="text" class="form-control" id="cred-title" placeholder="ex: Marcas Globais">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="cred-desc">Descrição do Destaque</label>
+      <textarea class="form-control" id="cred-desc" rows="4" placeholder="Escreva a descrição do destaque..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="cred-icon">Ícone do Destaque</label>
+      <select class="form-control" id="cred-icon">
+        <option value="globe">Globo (Internet / Conexão)</option>
+        <option value="gear">Engrenagem (Processos / Automotivo)</option>
+        <option value="cpu">Chip / CPU (Inteligência Artificial / Tecnologia)</option>
+        <option value="camera">Câmera Fotográfica (Imagem / CGI)</option>
+        <option value="video">Câmera de Vídeo (Animação / CGI)</option>
+        <option value="pen">Caneta (Design / Identidade Visual)</option>
+        <option value="star">Estrela (Prêmios / Destaque)</option>
+        <option value="zap">Raio (Velocidade / Impacto)</option>
+        <option value="eye">Olho (Visual / Visão Artística)</option>
+        <option value="layers">Camadas (Modelagem / Multidisciplinar)</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top: 32px;" onclick="saveCredentialForm()">Confirmar Destaque</button>
+    <button class="btn btn-secondary" style="margin-top: 12px; margin-bottom: 32px;" onclick="closeCredentialForm()">Cancelar</button>
+  </div>
+
+  <!-- 4. STATUS OVERLAY / LOADER PANEL -->
+  <div id="status-overlay">
+    <div class="status-box">
+      <div class="loader" id="status-loader"></div>
+      <div class="status-title" id="status-text">Processando...</div>
+      <button class="btn btn-secondary" id="btn-status-ok" style="display: none;" onclick="closeStatusOverlay()">OK</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JS CORE CONTROLLER
+       ========================================================================== -->
+  <script>
+    // Force canonical domain without 'www' to prevent Netlify Identity CORS/Redirect failures
+    if (window.location.hostname === "www.evoadesign.com.br") {
+      window.location.replace("https://evoadesign.com.br" + window.location.pathname + window.location.search + window.location.hash);
+    }
+
+    // Global Error Logger for UI diagnostics
+    window.addEventListener('error', (event) => {
+      const banner = document.getElementById('global-error-banner');
+      if (banner) {
+        banner.style.display = 'block';
+        banner.innerHTML = `<strong>Erro de Execução Detectado:</strong><br>${event.message}<br><small style="color:var(--color-text-muted);">${event.filename ? event.filename.split('/').pop() : 'script'}:${event.lineno || 0}:${event.colno || 0}</small>`;
+      }
+    });
+
+    // SPA memory states
+    let globalSettings = {};
+    let projectsDatabase = { items: [] };
+    let editingProjectId = null;
+    let editingClientId = null;
+    let editingFaqId = null;
+    let editingCredentialId = null;
+    let offlineMode = false;
+    let gitShaSettings = '';
+    let gitShaProjects = '';
+
+    // ==========================================
+    // 1. INITIALIZATION & AUTHENTICATION (Netlify Identity)
+    // ==========================================
+    const initializeBuilder = () => {
+      const hasIdentity = typeof netlifyIdentity !== 'undefined';
+
+      if (hasIdentity) {
+        try {
+          const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "";
+          if (isLocal) {
+            netlifyIdentity.init({
+              APIUrl: 'https://evoadesign.com.br/.netlify/identity'
+            });
+          } else {
+            // Remove cached site URL to force auto-detection of the current domain
+            localStorage.removeItem('netlifySiteURL');
+            netlifyIdentity.init();
+          }
+
+          // Check current user state
+          const user = netlifyIdentity.currentUser();
+          if (user) {
+            handleUserLogin(user);
+          } else {
+            // Safe check for offline localhost development
+            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+              console.log("Studio Builder: Local development environment detected.");
+            }
+          }
+
+          // Netlify Identity triggers
+          netlifyIdentity.on('login', user => {
+            netlifyIdentity.close();
+            handleUserLogin(user);
+          });
+
+          netlifyIdentity.on('logout', () => {
+            window.location.reload();
+          });
+        } catch (e) {
+          console.error("Erro na inicialização do Netlify Identity:", e);
+          const banner = document.getElementById('global-error-banner');
+          if (banner) {
+            banner.style.display = 'block';
+            banner.innerHTML = `<strong>Falha na Inicialização do Netlify:</strong><br>${e.message}`;
+          }
         }
-      },
-      {
-        "@type": "Question",
-        "name": "Como o CGI para Publicidade aumenta as vendas e o impacto de campanhas?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "O CGI para publicidade permite conceber campanhas cinematográficas de alto impacto que seriam fisicamente impossíveis ou perigosas de realizar. Ele possibilita renderizar efeitos visuais extraordinários, simular dinâmicas de veículos (CGI Automotivo) com fotorrealismo impecável e gerar composições artísticas integradas que capturam e retêm a atenção do público de maneira superior às mídias estáticas padrão."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Como funciona o processo de criação de uma Animação 3D de produto e publicidade?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "O processo é dividido em quatro etapas principais: 1. Concept e Storyboard (planejamento das cenas e mood da história); 2. Modelagem 3D e Texturização (reprodução digital do produto em alta definição com materiais fotorrealistas); 3. Animação e Simulação de Partículas (aplicação de movimentos, câmeras dinâmicas e efeitos como líquidos e tecidos); 4. Iluminação e Renderização final em 8K, seguida por pós-produção."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "O que é animação com IA e como a Inteligência Artificial é integrada aos projetos?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A animação com Inteligência Artificial é a integração de ferramentas gerativas de redes neurais no fluxo de renderização 3D e animação. Na evoadesign, utilizamos a IA para acelerar a geração de texturas procedurais ultra-detalhadas, interpolar quadros para maior fluidez e conceber moodboards criativos na fase de pré-produção. A IA potencializa a criatividade do designer humano, garantindo um produto final de qualidade exponencial em tempo recorde."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "O estúdio realiza o Design de Produto (styling) ou apenas a renderização 3D?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A evoadesign realiza o styling conceitual e o refinamento do design de produto de maneira integrada. Atuamos desde a tradução visual de conceitos e aplicação de materiais e acabamentos premium (Color, Material & Finish) até a visualização conceitual fotorrealista final, conectando a engenharia de precisão 3D à sensibilidade estética industrial."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Como a Identidade Visual e o Design Gráfico são conectados ao 3D e CGI?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Desenvolvemos identidades visuais e designs gráficos pensando na tridimensionalidade do produto. Criamos embalagens de alto padrão, sistemas de marca e designs de papelaria já integrados aos estudos de materiais e CGI 3D. Isso garante que a marca funcione de maneira consistente tanto no ambiente digital (redes e e-commerce) quanto nos canais físicos e de varejo tátil."
+      } else {
+        console.warn("Netlify Identity widget não foi carregado. Operando em modo de fallback offline.");
+      }
+
+      // Hook up UI Login Buttons
+      const btnLoginIdentity = document.getElementById('btn-login-identity');
+      if (btnLoginIdentity) {
+        btnLoginIdentity.addEventListener('click', () => {
+          if (typeof netlifyIdentity !== 'undefined') {
+            try {
+              btnLoginIdentity.textContent = "Conectando...";
+              netlifyIdentity.open();
+              setTimeout(() => {
+                btnLoginIdentity.textContent = "Fazer Login";
+              }, 4000);
+            } catch (e) {
+              alert("Erro ao abrir a janela de login do Netlify: " + e.message);
+              btnLoginIdentity.textContent = "Fazer Login";
+            }
+          } else {
+            alert("O serviço de autenticação do Netlify não pôde ser carregado.\n\nProváveis causas:\n1. Falha de conexão com a internet.\n2. Uso de bloqueadores de anúncios/scripts no navegador.\n3. Acesso direto por arquivo local (file://). Certifique-se de servir a página sob um domínio HTTP/HTTPS.\n\nPor favor, recarregue a página.");
+          }
+        });
+      }
+
+      // Hide "Trabalhar Offline" button on production for absolute security
+      const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "";
+      const btnLoginOffline = document.getElementById('btn-login-offline');
+      if (btnLoginOffline) {
+        if (isLocal) {
+          btnLoginOffline.style.display = 'block';
+          btnLoginOffline.addEventListener('click', () => {
+            if (typeof netlifyIdentity !== 'undefined') {
+              try {
+                netlifyIdentity.close();
+              } catch (e) {}
+            }
+            offlineMode = true;
+            document.getElementById('login-screen').style.opacity = '0';
+            setTimeout(() => {
+              document.getElementById('login-screen').style.display = 'none';
+              document.getElementById('editor-container').style.display = 'flex';
+              initializeDatabaseOffline();
+            }, 500);
+          });
+        } else {
+          btnLoginOffline.style.display = 'none';
         }
       }
-    ]
-  }
-  </script>
-</head>
-<body class="dark-agency-theme">
+    };
 
-  <!-- Premium Glowing Preloader Overlay -->
-  <div id="preloader" class="preloader-overlay">
-    <div class="preloader-content">
-      <img src="assets/images/EVOA-LOGO-BRANCO.png" alt="evoadesign" class="preloader-logo">
-      <div class="preloader-loader-wrapper">
-        <div class="preloader-bar"></div>
-      </div>
-    </div>
-  </div>
+    // Run initialization safely, avoiding browser DOMContentLoaded race conditions
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initializeBuilder);
+    } else {
+      initializeBuilder();
+    }
 
-  <!-- Glowing Capsule Header Navigation -->
-  <header id="main-header" class="agency-header">
-    <div class="header-container">
-      
-      <!-- Left Logo: Authentic EVOA White Logo -->
-      <a href="#inicio" class="logo-link" id="nav-logo">
-        <img src="assets/images/EVOA-LOGO-BRANCO.png" alt="evoadesign" class="header-logo-img">
-      </a>
-
-      <!-- Middle Navigation Links in uppercase tracking -->
-      <nav class="nav-menu" id="desktop-nav">
-        <ul>
-          <li><a href="#inicio" class="nav-link active">INÍCIO</a></li>
-          <li><a href="#sobre" class="nav-link">SOBRE</a></li>
-          <li><a href="#servicos" class="nav-link">SERVIÇOS</a></li>
-          <li><a href="#projetos" class="nav-link">PROJETOS</a></li>
-          <li><a href="#faq" class="nav-link">FAQ</a></li>
-          <li><a href="#contato" class="nav-link">CONTATO</a></li>
-        </ul>
-      </nav>
-
-      <!-- Right CTA button: Glowing primary blue pill button -->
-      <div class="header-cta-wrapper">
-        <a href="#contato" class="btn-cta-agency" id="cta-header">FALAR CONOSCO</a>
+    const handleUserLogin = (user) => {
+      document.getElementById('login-screen').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('editor-container').style.display = 'flex';
         
-        <!-- Mobile hamburger menu icon -->
-        <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Abrir Menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
+        // Show profile bar
+        document.getElementById('user-name-display').textContent = user.user_metadata.full_name || user.email;
+        if (user.user_metadata.full_name) {
+          document.getElementById('user-avatar').textContent = user.user_metadata.full_name.charAt(0).toUpperCase();
+        }
+        
+        fetchDatabaseFromGitGateway(user);
+      }, 500);
+    };
 
-    </div>
-  </header>
+    const logoutUser = () => {
+      if (typeof netlifyIdentity !== 'undefined' && netlifyIdentity.currentUser()) {
+        netlifyIdentity.logout();
+      } else {
+        window.location.reload();
+      }
+    };
 
-  <!-- Mobile Drawer Menu Overlay -->
-  <div class="mobile-menu-overlay" id="mobile-overlay">
-    <nav class="mobile-nav-menu">
-      <ul>
-        <li><a href="#inicio" class="mobile-nav-link">INÍCIO</a></li>
-        <li><a href="#sobre" class="mobile-nav-link">SOBRE</a></li>
-        <li><a href="#servicos" class="mobile-nav-link">SERVIÇOS</a></li>
-        <li><a href="#projetos" class="mobile-nav-link">PROJETOS</a></li>
-        <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
-        <li><a href="#contato" class="mobile-nav-link">CONTATO</a></li>
-      </ul>
-      <a href="#contato" class="btn-cta-mobile">FALAR CONOSCO</a>
-    </nav>
-  </div>
-
-  <main>
+    // ==========================================
+    // 2. DATA MANAGEMENT (Fetches & Sincronizadores)
+    // ==========================================
     
-    <!-- HERO SECTION (Cinematic Fullscreen Showcase) -->
-    <section id="inicio" class="hero-agency-section">
+    // Fetch directly from production API Gateway
+    const fetchDatabaseFromGitGateway = (user) => {
+      showLoader("Carregando configurações do site...");
+      const token = user.token.access_token;
       
-      <!-- Fullscreen absolute background Vimeo video banner (Autoplay &amp; Loop) -->
-      <div class="hero-agency-visual reveal-on-scroll delay-1">
-        <div class="hero-video-background">
-          <iframe id="hero-vimeo-player" src="https://player.vimeo.com/video/1166975823?background=1&amp;autoplay=1&amp;loop=1&amp;byline=0&amp;title=0&amp;muted=1" frameborder="0" allow="autoplay; fullscreen" webkitallowfullscreen mozallowfullscreen allowfullscreen sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
-        </div>
-        <div class="visual-gradient-fade"></div>
-      </div>
+      const headers = {
+        'Authorization': `Bearer ${token}`
+      };
 
-      <!-- Glow ambient lights behind -->
-      <div class="glow-leak glow-blue"></div>
-      
-      <div class="container hero-agency-container">
-        
-        <!-- Overlaid bold/outlined text content (Left) -->
-        <div class="hero-agency-text reveal-on-scroll">
-          <span class="hero-agency-subtitle">ESTÚDIO DE DESIGN &amp; CGI</span>
-          <h1 class="hero-agency-title">Nós criamos <span class="text-primary">experiências visuais</span> de <span class="text-glow">altíssimo impacto.</span></h1>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- MANIFESTO SECTION (Pure Black Contrast Block) -->
-    <section id="sobre" class="manifesto-agency-section scroll-margin">
-      <div class="container">
-        <div class="manifesto-glow-line"></div>
-        
-        <div class="manifesto-agency-wrapper">
-          <div class="manifesto-agency-content reveal-on-scroll">
-            <span class="manifesto-agency-tag">MANIFESTO DO ESTÚDIO</span>
-            <h2 class="manifesto-agency-text">Design multidisciplinar focado na precisão fotorrealista e na vanguarda conceitual. Traduzimos ideias complexas em imagens CGI de altíssimo impacto.</h2>
-            <p class="manifesto-agency-desc">A evoadesign une sensibilidade artística e rigor técnico para traduzir ideias complexas em imagens CGI fotorrealistas e soluções visuais integradas. Nossos projetos são estruturados sob medida para encantar seu público e multiplicar o valor da sua marca.</p>
-          </div>
+      // 1. Fetch settings.json metadata and content
+      fetch('/.netlify/git/github/contents/content/settings.json', { headers })
+        .then(res => res.json())
+        .then(data => {
+          gitShaSettings = data.sha;
+          // Decode content from base64
+          const decoded = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
+          globalSettings = JSON.parse(decoded);
           
-          <!-- Massive integrated Nissan Magnite Render -->
-          <div class="manifesto-agency-visual reveal-on-scroll delay-1">
-            <img src="assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6401.PNG" alt="Nissan Magnite - evoadesign" class="manifesto-img">
-            <div class="manifesto-visual-overlay">
-              <span class="visual-overlay-tag">CGI Automotivo</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- High-End Credentials & Highlights Grid -->
-        <div class="manifesto-credentials reveal-on-scroll delay-2" id="manifesto-credentials-container">
-          <!-- Dynamic Highlights cards injected via JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES SECTION (High-Impact Interactive Bento Visual Cards) -->
-    <section id="servicos" class="services-agency-section scroll-margin">
-      <!-- Glow ambient lights behind -->
-      <div class="glow-leak glow-blue-right"></div>
-      
-      <div class="container">
-        
-        <div class="section-header reveal-on-scroll">
-          <span class="section-tag">SERVIÇOS CREATIVOS</span>
-          <h2 class="section-agency-title">Nossos Serviços</h2>
-        </div>
-
-        <!-- Bento Grid Layout of Large Interactive Visual Cards -->
-        <div class="services-agency-grid">
+          // 2. Fetch projects.json metadata and content
+          return fetch('/.netlify/git/github/contents/content/projects.json', { headers });
+        })
+        .then(res => res.json())
+        .then(data => {
+          gitShaProjects = data.sha;
+          const decoded = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
+          projectsDatabase = JSON.parse(decoded);
           
-          <!-- Card 1: CGI para Publicidade (Nissan Magnite Launch) -->
-          <div class="service-visual-card reveal-on-scroll">
-            <!-- Background Image -->
-            <img src="assets/images/Nissan Magnite – Lançamento Oficial México/IMG_6403.PNG" alt="CGI para Publicidade" class="sv-card-bg-img">
-            <!-- Dark Glass Overlay -->
-            <div class="sv-card-overlay"></div>
-            
-            <div class="sv-card-content">
-              <span class="sv-card-num">01</span>
-              <div class="sv-card-text">
-                <h3>CGI para Publicidade</h3>
-                <p>Concepção de campanhas cinematográficas e visualizações publicitárias integradas, como o lançamento oficial do Nissan Magnite no México.</p>
-              </div>
-            </div>
-          </div>
+          hideLoader();
+          populateInputs();
+        })
+        .catch(err => {
+          console.error("Error loading files through Git Gateway:", err);
+          const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+          if (isLocal) {
+            console.log("Git Gateway not available on localhost. Silently falling back to offline mode.");
+          } else {
+            showStatusError("Falha ao comunicar com o Git Gateway. Trabalhando com arquivos locais no modo offline.");
+          }
+          offlineMode = true;
+          initializeDatabaseOffline();
+        });
+    };
 
-          <!-- Card 2: CGI de Produto (SOVRANO Relógios) -->
-          <div class="service-visual-card reveal-on-scroll delay-1">
-            <!-- Background Image -->
-            <img src="assets/images/SOVRANO - Visualização de Produto com IA/Branco/BACK SOVRANO_PRINCIPATO_BRANCO_2.png" alt="CGI de Produto" class="sv-card-bg-img">
-            <!-- Dark Glass Overlay -->
-            <div class="sv-card-overlay"></div>
-            
-            <div class="sv-card-content">
-              <span class="sv-card-num">02</span>
-              <div class="sv-card-text">
-                <h3>CGI de Produto</h3>
-                <p>Renderização de alta fidelidade e estudo de variantes estéticas e materiais, exemplificado pelas visualizações premium dos relógios SOVRANO.</p>
-              </div>
-            </div>
-          </div>
+    // Offline mode: Load static local files in preview
+    const initializeDatabaseOffline = () => {
+      showLoader("Carregando arquivos locais...");
+      Promise.all([
+        fetch('../content/settings.json').then(res => res.json()),
+        fetch('../content/projects.json').then(res => res.json())
+      ])
+      .then(([settings, projects]) => {
+        globalSettings = settings;
+        projectsDatabase = projects;
+        hideLoader();
+        populateInputs();
+      })
+      .catch(err => {
+        console.error("Local files loading error:", err);
+        showStatusError("Erro ao carregar banco de dados local. Inicializando configurações vazias.");
+        hideLoader();
+      });
+    };
 
-          <!-- Card 3: Cenografia & Experiência (Jeep Cardisplay / Abarth Academy) -->
-          <div class="service-visual-card reveal-on-scroll delay-2">
-            <!-- Background Image -->
-            <img src="assets/images/Jeep Cardisplay/FCA_0358_EST_V2_003.png" alt="Cenografia & Experiência" class="sv-card-bg-img">
-            <!-- Dark Glass Overlay -->
-            <div class="sv-card-overlay"></div>
-            
-            <div class="sv-card-content">
-              <span class="sv-card-num">03</span>
-              <div class="sv-card-text">
-                <h3>Cenografia &amp; Experiência</h3>
-                <p>Desenho cenográfico tridimensional e propostas de jornadas de usuário imersivas, como o Jeep Cardisplay e a Abarth Racer's Academy.</p>
-              </div>
-            </div>
-          </div>
+    // Sync input values with database structures
+    const populateInputs = () => {
+      // General Settings Tab
+      document.getElementById('seo-title').value = globalSettings.seoTitle || '';
+      document.getElementById('seo-description').value = globalSettings.seoDescription || '';
+      document.getElementById('favicon-path').value = globalSettings.favicon || 'assets/images/FAVICON.png';
+      document.getElementById('disable-image-save').checked = globalSettings.disableImageSave !== false;
 
-          <!-- Card 4: Identidade Visual & Branding (Logcare Redesign) -->
-          <div class="service-visual-card reveal-on-scroll delay-3">
-            <!-- Background Image -->
-            <img src="assets/images/Logcare - Redesign & Identidade Visual/16.jpg" alt="Identidade Visual & Branding" class="sv-card-bg-img">
-            <!-- Dark Glass Overlay -->
-            <div class="sv-card-overlay"></div>
-            
-            <div class="sv-card-content">
-              <span class="sv-card-num">04</span>
-              <div class="sv-card-text">
-                <h3>Identidade Visual & Branding</h3>
-                <p>Construção de marcas e sistemas visuais multidisciplinares, demonstrado pelo redesign de identidade visual corporativa da Logcare.</p>
-              </div>
-            </div>
-          </div>
+      // Hero / Presentation Tab
+      document.getElementById('hero-subtitle').value = globalSettings.heroSubtitle || '';
+      document.getElementById('hero-title').value = globalSettings.heroTitle || '';
+      document.getElementById('about-tag').value = globalSettings.aboutTag || '';
+      document.getElementById('about-text').value = globalSettings.aboutText || '';
+      document.getElementById('about-description').value = globalSettings.aboutDescription || '';
 
-        </div>
+      document.getElementById('clients-title').value = globalSettings.clientsTitle || 'Nossos Últimos Clientes e Colaborações';
+      document.getElementById('faq-tag').value = globalSettings.faqTag || 'FAQ ESPECIALIZADO';
+      document.getElementById('faq-title').value = globalSettings.faqTitle || 'Dúvidas Frequentes';
 
-      </div>
-    </section>
+      document.getElementById('show-clients-section').checked = globalSettings.showClientsSection !== false;
+      document.getElementById('show-faq-section').checked = globalSettings.showFaqSection !== false;
+      document.getElementById('show-credentials-section').checked = globalSettings.showCredentialsSection !== false;
 
-    <!-- IMMERSIVE ASYMMETRICAL PROJECTS SECTION -->
-    <section id="projetos" class="projects-agency-section scroll-margin">
-      <div class="container">
-        
-        <div class="section-header reveal-on-scroll">
-          <span class="section-tag">CINEMATIC PORTFÓLIO</span>
-          <h2 class="section-agency-title">Projetos Recentes</h2>
-        </div>
+      // Contact Tab
+      document.getElementById('contact-whatsapp').value = globalSettings.contactWhatsapp || '';
+      document.getElementById('contact-email').value = globalSettings.contactEmail || '';
+      document.getElementById('footer-cnpj').value = globalSettings.footerCnpj || '';
+      document.getElementById('footer-razao').value = globalSettings.footerRazaoSocial || '';
 
-        <!-- Asymmetrical Project Grid for Dynamic flow (Injected via JS) -->
-        <div class="projects-agency-grid"></div>
+      // Design settings
+      if (globalSettings.styles) {
+        const styles = globalSettings.styles;
+        document.getElementById('style-primary-color').value = styles.primaryColor || '#009ae0';
+        document.getElementById('style-primary-color-text').value = styles.primaryColor || '#009ae0';
+        document.getElementById('style-glow-intensity').value = styles.glowIntensity !== undefined ? styles.glowIntensity : 0.35;
+        document.getElementById('style-glow-val').textContent = `${Math.round((styles.glowIntensity !== undefined ? styles.glowIntensity : 0.35) * 100)}%`;
+        document.getElementById('style-section-padding').value = styles.sectionPadding !== undefined ? styles.sectionPadding : 120;
+        document.getElementById('style-padding-val').textContent = `${styles.sectionPadding !== undefined ? styles.sectionPadding : 120}px`;
+        document.getElementById('style-grid-gap').value = styles.gridGap !== undefined ? styles.gridGap : 40;
+        document.getElementById('style-gap-val').textContent = `${styles.gridGap !== undefined ? styles.gridGap : 40}px`;
+      }
 
-      </div>
-    </section>
+      // Populate dynamic social networks list
+      renderSocialPlatforms();
 
-    <!-- IMMERSIVE CLIENTES SECTION -->
-    <section id="clientes" class="clients-agency-section">
-      <div class="container">
-        
-        <div class="clients-agency-card reveal-on-scroll">
-          <h2 class="section-title text-center" id="clients-section-title-display">Nossos Últimos Clientes e Colaborações</h2>
-          <div class="title-underline margin-center bg-primary"></div>
-          
-          <div class="marquee-wrapper">
-            <div class="marquee-content" id="marquee-content-container">
-              <!-- Dynamic Client Logos Injected by JS -->
-            </div>
-          </div>
-        </div>
+      // Render projects grid manager
+      renderProjectsManagerList();
 
-      </div>
-    </section>
+      // Render clients and FAQs managers
+      renderClientsManagerList();
+      renderFaqsManagerList();
+      renderCredentialsManagerList();
 
-    <!-- FAQ SECTION (Structured SEO Dúvidas Frequentes) -->
-    <section id="faq" class="faq-agency-section scroll-margin">
-      <!-- Glow ambient lights behind -->
-      <div class="glow-leak glow-blue-left"></div>
+      // Trigger initial preview sync inside iframe
+      setTimeout(sendPreviewUpdate, 1200);
+    };
+
+    // ==========================================
+    // 3. TAB NAVIGATION
+    // ==========================================
+    const switchTab = (tabId) => {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-pane').forEach(pane => {
+        pane.classList.remove('active');
+      });
+
+      // Find trigger button and activate pane
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    };
+
+    const switchViewport = (type, btn) => {
+      document.querySelectorAll('.btn-viewport').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const iframe = document.getElementById('preview-iframe');
+      iframe.className = '';
+      iframe.classList.add(`viewport-${type}`);
+    };
+
+    // ==========================================
+    // 4. REAL-TIME PREVIEW EMITTER (postMessage)
+    // ==========================================
+    const sendPreviewUpdate = () => {
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({
+          type: 'PREVIEW_UPDATE',
+          settings: globalSettings,
+          projects: projectsDatabase
+        }, '*');
+      }
+    };
+
+    // Collect variables from controls and inject into local JSON structures
+    const updateGlobalSettings = () => {
+      globalSettings.seoTitle = document.getElementById('seo-title').value;
+      globalSettings.seoDescription = document.getElementById('seo-description').value;
+      globalSettings.favicon = document.getElementById('favicon-path').value;
+      globalSettings.disableImageSave = document.getElementById('disable-image-save').checked;
+
+      globalSettings.heroSubtitle = document.getElementById('hero-subtitle').value;
+      globalSettings.heroTitle = document.getElementById('hero-title').value;
+      globalSettings.aboutTag = document.getElementById('about-tag').value;
+      globalSettings.aboutText = document.getElementById('about-text').value;
+      globalSettings.aboutDescription = document.getElementById('about-description').value;
+
+      globalSettings.clientsTitle = document.getElementById('clients-title').value;
+      globalSettings.faqTag = document.getElementById('faq-tag').value;
+      globalSettings.faqTitle = document.getElementById('faq-title').value;
+
+      globalSettings.showClientsSection = document.getElementById('show-clients-section').checked;
+      globalSettings.showFaqSection = document.getElementById('show-faq-section').checked;
+      globalSettings.showCredentialsSection = document.getElementById('show-credentials-section').checked;
+
+      globalSettings.contactWhatsapp = document.getElementById('contact-whatsapp').value;
+      globalSettings.contactEmail = document.getElementById('contact-email').value;
+      globalSettings.footerCnpj = document.getElementById('footer-cnpj').value;
+      globalSettings.footerRazaoSocial = document.getElementById('footer-razao').value;
+
+      // Sync Social Links list
+      syncSocialLinksArray();
+
+      sendPreviewUpdate();
+    };
+
+    const updateStyleSettings = () => {
+      if (!globalSettings.styles) globalSettings.styles = {};
       
-      <div class="container">
+      const primaryColor = document.getElementById('style-primary-color').value;
+      document.getElementById('style-primary-color-text').value = primaryColor;
+      
+      const glowIntensity = parseFloat(document.getElementById('style-glow-intensity').value);
+      document.getElementById('style-glow-val').textContent = `${Math.round(glowIntensity * 100)}%`;
+      
+      const sectionPadding = parseInt(document.getElementById('style-section-padding').value);
+      document.getElementById('style-padding-val').textContent = `${sectionPadding}px`;
+      
+      const gridGap = parseInt(document.getElementById('style-grid-gap').value);
+      document.getElementById('style-gap-val').textContent = `${gridGap}px`;
+
+      globalSettings.styles.primaryColor = primaryColor;
+      globalSettings.styles.glowIntensity = glowIntensity;
+      globalSettings.styles.sectionPadding = sectionPadding;
+      globalSettings.styles.gridGap = gridGap;
+
+      sendPreviewUpdate();
+    };
+
+    const updateStyleSettingsHex = (hex) => {
+      if (/^#[0-9A-F]{6}$/i.test(hex)) {
+        document.getElementById('style-primary-color').value = hex;
+        updateStyleSettings();
+      }
+    };
+
+    // ==========================================
+    // 5. SOCIAL PLATFORMS DYNAMIC LIST
+    // ==========================================
+    const renderSocialPlatforms = () => {
+      const container = document.getElementById('social-links-list');
+      container.innerHTML = '';
+
+      const socialLinks = globalSettings.socialLinks || [];
+      socialLinks.forEach((link, idx) => {
+        const selectId = `social-platform-${idx}`;
+        const urlId = `social-url-${idx}`;
         
-        <div class="section-header reveal-on-scroll text-center">
-          <span class="section-tag margin-center" id="faq-section-tag-display">FAQ ESPECIALIZADO</span>
-          <h2 class="section-agency-title" id="faq-section-title-display">Dúvidas Frequentes</h2>
-          <div class="title-underline margin-center bg-primary"></div>
-        </div>
-
-        <!-- FAQ Accordion Layout -->
-        <div class="faq-accordion-wrapper reveal-on-scroll" id="faq-accordion-container">
-          <!-- Dynamic FAQ Accordion Injected by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- IMMERSIVE CONTACT SECTION (Glowing Glassmorphism Card) -->
-    <section id="contato" class="contact-agency-section scroll-margin">
-      <!-- Glow ambient lights behind -->
-      <div class="glow-leak glow-blue-left"></div>
-      
-      <div class="container">
-        
-        <div class="contact-agency-card reveal-on-scroll">
-          <div class="contact-agency-grid-inner">
-            
-            <!-- Left Info Panel -->
-            <div class="contact-agency-info-panel">
-              <span class="cc-tag">CONEXÃO IMEDIATA</span>
-              <h2 class="contact-agency-title-main">Vamos criar algo extraordinário juntos?</h2>
-              <p class="contact-agency-desc">Entre em contato hoje e descubra como nosso design multidisciplinar e CGI de alta precisão podem destacar seu projeto no mercado.</p>
-              
-              <div class="contact-agency-details">
-                <div class="cc-detail-item">
-                  <div class="cc-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                      <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                  </div>
-                  <a href="mailto:vitor.belluco@evoadesign.com.br" class="cc-link">vitor.belluco@evoadesign.com.br</a>
-                </div>
-                <div class="cc-detail-item">
-                  <div class="cc-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                    </svg>
-                  </div>
-                  <a href="https://wa.me/5519998571988" target="_blank" rel="noopener noreferrer" class="cc-link">+55 (19) 99857-1988</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Right Form Panel -->
-            <div class="contact-agency-form-panel">
-              <h3 class="cc-form-title">Envie uma Mensagem</h3>
-              
-              <form id="contact-form" class="agency-form" novalidate>
-                <div class="form-group">
-                  <label for="name">Nome*</label>
-                  <input type="text" id="name" name="name" required placeholder="Seu nome completo">
-                  <span class="error-msg" id="name-error">Nome é obrigatório</span>
-                </div>
-
-                <div class="form-group-row">
-                  <div class="form-group">
-                    <label for="phone">Telefone*</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="(11) 99999-9999">
-                    <span class="error-msg" id="phone-error">Telefone é obrigatório</span>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="email">Email*</label>
-                    <input type="email" id="email" name="email" required placeholder="seu@email.com">
-                    <span class="error-msg" id="email-error">Insira um email válido</span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="message">Mensagem*</label>
-                  <textarea id="message" name="message" rows="3" required placeholder="Escreva sobre a sua ideia ou produto..."></textarea>
-                  <span class="error-msg" id="message-error">Por favor, escreva uma mensagem</span>
-                </div>
-
-                <button type="submit" class="btn-submit-agency-form" id="btn-send-message">
-                  <span class="btn-text">ENVIAR MENSAGEM</span>
-                  <span class="spinner"></span>
-                </button>
-              </form>
-
-              <!-- Success Alert Banner Inside the Card Flow -->
-              <div class="form-success-alert-agency" id="success-alert">
-                <div class="success-icon-agency">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                </div>
-                <div class="success-content-agency">
-                  <h4>Mensagem Recebida!</h4>
-                  <p>Agradecemos o contato. Responderemos o seu contato o mais breve possível.</p>
-                </div>
-              </div>
-            </div>
-
+        container.insertAdjacentHTML('beforeend', `
+          <div class="dynamic-item" id="social-item-${idx}">
+            <select class="form-control" id="${selectId}" style="width: 120px; flex-shrink: 0;" onchange="updateGlobalSettings()">
+              <option value="instagram" ${link.platform === 'instagram' ? 'selected' : ''}>Instagram</option>
+              <option value="behance" ${link.platform === 'behance' ? 'selected' : ''}>Behance</option>
+              <option value="linkedin" ${link.platform === 'linkedin' ? 'selected' : ''}>LinkedIn</option>
+              <option value="youtube" ${link.platform === 'youtube' ? 'selected' : ''}>YouTube</option>
+              <option value="vimeo" ${link.platform === 'vimeo' ? 'selected' : ''}>Vimeo</option>
+              <option value="whatsapp" ${link.platform === 'whatsapp' ? 'selected' : ''}>WhatsApp</option>
+            </select>
+            <input type="text" class="form-control" id="${urlId}" value="${link.url || ''}" placeholder="https://..." oninput="updateGlobalSettings()">
+            <button class="btn-icon btn-icon-danger" style="flex-shrink: 0;" onclick="removeSocialPlatform(${idx})">X</button>
           </div>
-        </div>
+        `);
+      });
+    };
 
-      </div>
-    </section>
+    const addSocialPlatform = () => {
+      if (!globalSettings.socialLinks) globalSettings.socialLinks = [];
+      globalSettings.socialLinks.push({ platform: 'instagram', url: '' });
+      renderSocialPlatforms();
+      updateGlobalSettings();
+    };
 
-  </main>
+    const removeSocialPlatform = (idx) => {
+      if (globalSettings.socialLinks) {
+        globalSettings.socialLinks.splice(idx, 1);
+        renderSocialPlatforms();
+        updateGlobalSettings();
+      }
+    };
 
-  <!-- DYNAMIC footer -->
-  <footer class="agency-footer">
-    <div class="container footer-agency-container">
+    const syncSocialLinksArray = () => {
+      if (!globalSettings.socialLinks) return;
       
-      <div class="footer-agency-top">
-        <div class="fa-links-col">
-          <h4>Navegação</h4>
-          <ul>
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#sobre">Sobre Nós</a></li>
-            <li><a href="#servicos">Nossos Serviços</a></li>
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#contato">Contato</a></li>
-          </ul>
-        </div>
-
-        <div class="fa-brand-col">
-          <img src="assets/images/EVOA-LOGO-BRANCO.png" alt="evoadesign" class="footer-logo-img">
-          <div class="fa-company-info">
-            <span class="fa-company-name">EVOA DESIGN STUDIO LTDA</span>
-            <span class="fa-company-cnpj">CNPJ 48.909.461/0001-08</span>
-          </div>
-          <div class="fa-social-icons">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </a>
-            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 12h-3v-3h3v3zm0-5h-3v2.5h3v-2.5zm10.5 4c0-2-1.5-3.5-3.5-3.5s-3.5 1.5-3.5 3.5 1.5 3.5 3.5 3.5 3.5-1.5 3.5-3.5zm-5 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm-3.5 3.5h-5.5v-10h5.5c2 0 3.5 1 3.5 3 0 1.5-1 2.5-2 2.8 1.2.3 2 1.2 2 2.7 0 2-1.5 3.5-3.5 3.5zm6-9.5h-5v1.5h5v-1.5z"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-agency-bottom">
-        <p>&copy; 2026 evoadesign. Todos os direitos reservados.</p>
-      </div>
-
-    </div>
-  </footer>
-
-  <!-- CINEMATIC PROJECT DRAWER OVERLAY -->
-  <div class="project-drawer-overlay" id="project-drawer-overlay">
-    <div class="project-drawer" id="project-drawer">
-      <button class="project-drawer-close" id="drawer-close" aria-label="Fechar Detalhes">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-      
-      <div class="project-drawer-content" id="drawer-content">
-        <!-- Injected dynamically via JS based on clicked project -->
-      </div>
-    </div>
-  </div>
-
-  <!-- CINEMATIC LIGHTBOX OVERLAY FOR FULLSCREEN IMAGES -->
-  <div class="lightbox-overlay" id="lightbox-overlay">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Fechar Imagem">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
-    <img class="lightbox-img" id="lightbox-img" src="" alt="Visualização em Tela Cheia">
-  </div>
-
-  <!-- Vimeo Player API SDK for preloader synchronization -->
-  <script src="https://player.vimeo.com/api/player.js"></script>
-  <!-- JS script -->
-  <script src="index.js"></script>
-
-  <!-- Netlify Identity Redirect script (Redirects to admin after login) -->
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
+      const newLinks = [];
+      const socialLinksLength = globalSettings.socialLinks.length;
+      for (let i = 0; i < socialLinksLength; i++) {
+        const platformEl = document.getElementById(`social-platform-${i}`);
+        const urlEl = document.getElementById(`social-url-${i}`);
+        if (platformEl && urlEl) {
+          newLinks.push({
+            platform: platformEl.value,
+            url: urlEl.value
           });
         }
+      }
+      globalSettings.socialLinks = newLinks;
+    };
+
+    // ==========================================
+    // 5.5 CLIENTS & FAQS MANAGERS
+    // ==========================================
+    const renderClientsManagerList = () => {
+      const container = document.getElementById('clients-list-container');
+      container.innerHTML = '';
+
+      if (!globalSettings.clients || globalSettings.clients.length === 0) {
+        container.innerHTML = '<div style="font-size: 11px; text-align: center; padding: 12px 0; color: var(--color-text-muted);">Nenhum cliente cadastrado.</div>';
+        return;
+      }
+
+      globalSettings.clients.forEach((client, idx) => {
+        container.insertAdjacentHTML('beforeend', `
+          <div class="project-item">
+            <div class="project-meta" style="max-width: 65%;">
+              <div class="project-meta-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${client.name || 'Sem nome'}</div>
+              <div class="project-meta-category" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${client.imageUrl || 'Sem logo'}</div>
+            </div>
+            
+            <div class="project-actions">
+              <button class="btn-icon" onclick="moveClientUp(${idx})" title="Subir na Lista">↑</button>
+              <button class="btn-icon" onclick="moveClientDown(${idx})" title="Descer na Lista">↓</button>
+              <button class="btn-icon" onclick="editClient(${idx})" title="Editar">✎</button>
+              <button class="btn-icon btn-icon-danger" onclick="deleteClient(${idx})" title="Excluir">🗑</button>
+            </div>
+          </div>
+        `);
       });
-    }
+    };
+
+    const moveClientUp = (idx) => {
+      if (idx === 0) return;
+      const temp = globalSettings.clients[idx];
+      globalSettings.clients[idx] = globalSettings.clients[idx - 1];
+      globalSettings.clients[idx - 1] = temp;
+      renderClientsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const moveClientDown = (idx) => {
+      if (idx === globalSettings.clients.length - 1) return;
+      const temp = globalSettings.clients[idx];
+      globalSettings.clients[idx] = globalSettings.clients[idx + 1];
+      globalSettings.clients[idx + 1] = temp;
+      renderClientsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const deleteClient = (idx) => {
+      if (confirm(`Tem certeza que deseja excluir permanentemente a logo do cliente "${globalSettings.clients[idx].name}"?`)) {
+        globalSettings.clients.splice(idx, 1);
+        renderClientsManagerList();
+        sendPreviewUpdate();
+      }
+    };
+
+    const openNewClientForm = () => {
+      editingClientId = null;
+      document.getElementById('client-subform-title').textContent = 'Novo Cliente';
+      document.getElementById('client-name').value = '';
+      document.getElementById('client-image').value = '';
+      document.getElementById('client-editor-overlay').style.display = 'flex';
+    };
+
+    const editClient = (idx) => {
+      editingClientId = idx;
+      const client = globalSettings.clients[idx];
+      document.getElementById('client-subform-title').textContent = `Editar: ${client.name}`;
+      document.getElementById('client-name').value = client.name || '';
+      document.getElementById('client-image').value = client.imageUrl || '';
+      document.getElementById('client-editor-overlay').style.display = 'flex';
+    };
+
+    const closeClientForm = () => {
+      document.getElementById('client-editor-overlay').style.display = 'none';
+    };
+
+    const saveClientForm = () => {
+      const name = document.getElementById('client-name').value.trim();
+      const imageUrl = document.getElementById('client-image').value.trim();
+      if (!name) {
+        alert("O nome do cliente é obrigatório!");
+        return;
+      }
+
+      const newClient = { name, imageUrl };
+
+      if (!globalSettings.clients) globalSettings.clients = [];
+
+      if (editingClientId === null) {
+        globalSettings.clients.push(newClient);
+      } else {
+        globalSettings.clients[editingClientId] = newClient;
+      }
+
+      renderClientsManagerList();
+      sendPreviewUpdate();
+      closeClientForm();
+    };
+
+    const renderCredentialsManagerList = () => {
+      const container = document.getElementById('credentials-list-container');
+      container.innerHTML = '';
+
+      if (!globalSettings.credentials || globalSettings.credentials.length === 0) {
+        container.innerHTML = '<div style="font-size: 11px; text-align: center; padding: 12px 0; color: var(--color-text-muted);">Nenhum destaque cadastrado.</div>';
+        return;
+      }
+
+      globalSettings.credentials.forEach((cred, idx) => {
+        container.insertAdjacentHTML('beforeend', `
+          <div class="project-item">
+            <div class="project-meta" style="max-width: 65%;">
+              <div class="project-meta-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${cred.title || 'Sem título'}</div>
+              <div class="project-meta-category" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ícone: ${cred.icon || 'globe'} - ${cred.description || 'Sem descrição'}</div>
+            </div>
+            
+            <div class="project-actions">
+              <button class="btn-icon" onclick="moveCredentialUp(${idx})" title="Subir na Lista">↑</button>
+              <button class="btn-icon" onclick="moveCredentialDown(${idx})" title="Descer na Lista">↓</button>
+              <button class="btn-icon" onclick="editCredential(${idx})" title="Editar">✎</button>
+              <button class="btn-icon btn-icon-danger" onclick="deleteCredential(${idx})" title="Excluir">🗑</button>
+            </div>
+          </div>
+        `);
+      });
+    };
+
+    const moveCredentialUp = (idx) => {
+      if (idx === 0) return;
+      const temp = globalSettings.credentials[idx];
+      globalSettings.credentials[idx] = globalSettings.credentials[idx - 1];
+      globalSettings.credentials[idx - 1] = temp;
+      renderCredentialsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const moveCredentialDown = (idx) => {
+      if (idx === globalSettings.credentials.length - 1) return;
+      const temp = globalSettings.credentials[idx];
+      globalSettings.credentials[idx] = globalSettings.credentials[idx + 1];
+      globalSettings.credentials[idx + 1] = temp;
+      renderCredentialsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const deleteCredential = (idx) => {
+      if (confirm(`Tem certeza que deseja excluir permanentemente o destaque "${globalSettings.credentials[idx].title}"?`)) {
+        globalSettings.credentials.splice(idx, 1);
+        renderCredentialsManagerList();
+        sendPreviewUpdate();
+      }
+    };
+
+    const openNewCredentialForm = () => {
+      editingCredentialId = null;
+      document.getElementById('credential-subform-title').textContent = 'Novo Destaque';
+      document.getElementById('cred-title').value = '';
+      document.getElementById('cred-desc').value = '';
+      document.getElementById('cred-icon').value = 'globe';
+      document.getElementById('credential-editor-overlay').style.display = 'flex';
+    };
+
+    const editCredential = (idx) => {
+      editingCredentialId = idx;
+      const cred = globalSettings.credentials[idx];
+      document.getElementById('credential-subform-title').textContent = 'Editar Destaque';
+      document.getElementById('cred-title').value = cred.title || '';
+      document.getElementById('cred-desc').value = cred.description || '';
+      document.getElementById('cred-icon').value = cred.icon || 'globe';
+      document.getElementById('credential-editor-overlay').style.display = 'flex';
+    };
+
+    const closeCredentialForm = () => {
+      document.getElementById('credential-editor-overlay').style.display = 'none';
+    };
+
+    const saveCredentialForm = () => {
+      const title = document.getElementById('cred-title').value.trim();
+      const description = document.getElementById('cred-desc').value.trim();
+      const icon = document.getElementById('cred-icon').value;
+      if (!title || !description) {
+        alert("Ambos título e descrição são obrigatórios!");
+        return;
+      }
+
+      const newCred = { title, description, icon };
+
+      if (!globalSettings.credentials) globalSettings.credentials = [];
+
+      if (editingCredentialId === null) {
+        globalSettings.credentials.push(newCred);
+      } else {
+        globalSettings.credentials[editingCredentialId] = newCred;
+      }
+
+      renderCredentialsManagerList();
+      sendPreviewUpdate();
+      closeCredentialForm();
+    };
+
+    const renderFaqsManagerList = () => {
+      const container = document.getElementById('faqs-list-container');
+      container.innerHTML = '';
+
+      if (!globalSettings.faqs || globalSettings.faqs.length === 0) {
+        container.innerHTML = '<div style="font-size: 11px; text-align: center; padding: 12px 0; color: var(--color-text-muted);">Nenhuma dúvida cadastrada.</div>';
+        return;
+      }
+
+      globalSettings.faqs.forEach((faq, idx) => {
+        container.insertAdjacentHTML('beforeend', `
+          <div class="project-item">
+            <div class="project-meta" style="max-width: 65%;">
+              <div class="project-meta-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${faq.question || 'Sem pergunta'}</div>
+              <div class="project-meta-category" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${faq.answer || 'Sem resposta'}</div>
+            </div>
+            
+            <div class="project-actions">
+              <button class="btn-icon" onclick="moveFaqUp(${idx})" title="Subir na Lista">↑</button>
+              <button class="btn-icon" onclick="moveFaqDown(${idx})" title="Descer na Lista">↓</button>
+              <button class="btn-icon" onclick="editFaq(${idx})" title="Editar">✎</button>
+              <button class="btn-icon btn-icon-danger" onclick="deleteFaq(${idx})" title="Excluir">🗑</button>
+            </div>
+          </div>
+        `);
+      });
+    };
+
+    const moveFaqUp = (idx) => {
+      if (idx === 0) return;
+      const temp = globalSettings.faqs[idx];
+      globalSettings.faqs[idx] = globalSettings.faqs[idx - 1];
+      globalSettings.faqs[idx - 1] = temp;
+      renderFaqsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const moveFaqDown = (idx) => {
+      if (idx === globalSettings.faqs.length - 1) return;
+      const temp = globalSettings.faqs[idx];
+      globalSettings.faqs[idx] = globalSettings.faqs[idx + 1];
+      globalSettings.faqs[idx + 1] = temp;
+      renderFaqsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const deleteFaq = (idx) => {
+      if (confirm(`Tem certeza que deseja excluir permanentemente a pergunta "${globalSettings.faqs[idx].question}"?`)) {
+        globalSettings.faqs.splice(idx, 1);
+        renderFaqsManagerList();
+        sendPreviewUpdate();
+      }
+    };
+
+    const openNewFaqForm = () => {
+      editingFaqId = null;
+      document.getElementById('faq-subform-title').textContent = 'Nova Dúvida Frequente';
+      document.getElementById('faq-question').value = '';
+      document.getElementById('faq-answer').value = '';
+      document.getElementById('faq-editor-overlay').style.display = 'flex';
+    };
+
+    const editFaq = (idx) => {
+      editingFaqId = idx;
+      const faq = globalSettings.faqs[idx];
+      document.getElementById('faq-subform-title').textContent = 'Editar Dúvida';
+      document.getElementById('faq-question').value = faq.question || '';
+      document.getElementById('faq-answer').value = faq.answer || '';
+      document.getElementById('faq-editor-overlay').style.display = 'flex';
+    };
+
+    const closeFaqForm = () => {
+      document.getElementById('faq-editor-overlay').style.display = 'none';
+    };
+
+    const saveFaqForm = () => {
+      const question = document.getElementById('faq-question').value.trim();
+      const answer = document.getElementById('faq-answer').value.trim();
+      if (!question || !answer) {
+        alert("Ambos pergunta e resposta são obrigatórios!");
+        return;
+      }
+
+      const newFaq = { question, answer };
+
+      if (!globalSettings.faqs) globalSettings.faqs = [];
+
+      if (editingFaqId === null) {
+        globalSettings.faqs.push(newFaq);
+      } else {
+        globalSettings.faqs[editingFaqId] = newFaq;
+      }
+
+      renderFaqsManagerList();
+      sendPreviewUpdate();
+      closeFaqForm();
+    };
+
+    // ==========================================
+    // 6. PORTFOLIO & PROJECTS DATABASE CRUD
+    // ==========================================
+    const renderProjectsManagerList = () => {
+      const container = document.getElementById('project-list-container');
+      container.innerHTML = '';
+
+      if (!projectsDatabase.items || projectsDatabase.items.length === 0) {
+        container.innerHTML = '<div style="font-size: 11px; text-align: center; padding: 12px 0;">Nenhum projeto cadastrado.</div>';
+        return;
+      }
+
+      projectsDatabase.items.forEach((proj, idx) => {
+        container.insertAdjacentHTML('beforeend', `
+          <div class="project-item">
+            <div class="project-meta">
+              <div class="project-meta-title">${proj.title || 'Sem título'}</div>
+              <div class="project-meta-category">${proj.category || 'Sem categoria'}</div>
+            </div>
+            
+            <div class="project-actions">
+              <button class="btn-icon" onclick="moveProjectUp(${idx})" title="Subir na Grade">↑</button>
+              <button class="btn-icon" onclick="moveProjectDown(${idx})" title="Descer na Grade">↓</button>
+              <button class="btn-icon" onclick="editProject(${idx})" title="Editar Detalhes">✎</button>
+              <button class="btn-icon btn-icon-danger" onclick="deleteProject(${idx})" title="Excluir">🗑</button>
+            </div>
+          </div>
+        `);
+      });
+    };
+
+    const moveProjectUp = (idx) => {
+      if (idx === 0) return;
+      const temp = projectsDatabase.items[idx];
+      projectsDatabase.items[idx] = projectsDatabase.items[idx - 1];
+      projectsDatabase.items[idx - 1] = temp;
+      renderProjectsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const moveProjectDown = (idx) => {
+      if (idx === projectsDatabase.items.length - 1) return;
+      const temp = projectsDatabase.items[idx];
+      projectsDatabase.items[idx] = projectsDatabase.items[idx + 1];
+      projectsDatabase.items[idx + 1] = temp;
+      renderProjectsManagerList();
+      sendPreviewUpdate();
+    };
+
+    const deleteProject = (idx) => {
+      if (confirm(`Tem certeza que deseja excluir permanentemente o projeto "${projectsDatabase.items[idx].title}"?`)) {
+        projectsDatabase.items.splice(idx, 1);
+        renderProjectsManagerList();
+        sendPreviewUpdate();
+      }
+    };
+
+    // Project Subform (Overlay Editor)
+    const openNewProjectForm = () => {
+      editingProjectId = null; // New project identifier
+      document.getElementById('project-subform-title').textContent = 'Novo Projeto';
+      
+      // Reset inputs to clean defaults
+      document.getElementById('proj-id').value = String(projectsDatabase.items.length + 1);
+      document.getElementById('proj-title').value = '';
+      document.getElementById('proj-category').value = '';
+      document.getElementById('proj-client').value = '';
+      document.getElementById('proj-year').value = '';
+      document.getElementById('proj-tools').value = '';
+      document.getElementById('proj-short').value = '';
+      document.getElementById('proj-description').value = '';
+      document.getElementById('proj-thumbnail').value = '';
+      document.getElementById('proj-video').value = '';
+      document.getElementById('proj-show-concept').checked = true;
+      document.getElementById('proj-show-cmf').checked = true;
+
+      renderSubformList('proj-concept-list', []);
+      renderSubformList('proj-cmf-list', []);
+      renderSubformList('proj-gallery-list', []);
+
+      document.getElementById('project-editor-overlay').style.display = 'flex';
+    };
+
+    const editProject = (idx) => {
+      editingProjectId = idx;
+      const proj = projectsDatabase.items[idx];
+      
+      document.getElementById('project-subform-title').textContent = `Editar: ${proj.title}`;
+      
+      document.getElementById('proj-id').value = proj.id || '';
+      document.getElementById('proj-title').value = proj.title || '';
+      document.getElementById('proj-category').value = proj.category || '';
+      document.getElementById('proj-client').value = proj.client || '';
+      document.getElementById('proj-year').value = proj.year || '';
+      document.getElementById('proj-tools').value = proj.tools || '';
+      document.getElementById('proj-short').value = proj.shortDescription || '';
+      document.getElementById('proj-description').value = proj.description || '';
+      document.getElementById('proj-thumbnail').value = proj.thumbnail || '';
+      document.getElementById('proj-video').value = proj.iframeEmbed || '';
+      document.getElementById('proj-show-concept').checked = proj.showConceptHighlights !== false;
+      document.getElementById('proj-show-cmf').checked = proj.showCmfHighlights !== false;
+
+      renderSubformList('proj-concept-list', proj.conceptHighlights || []);
+      renderSubformList('proj-cmf-list', proj.cmfHighlights || []);
+      renderSubformList('proj-gallery-list', proj.gallery || []);
+
+      document.getElementById('project-editor-overlay').style.display = 'flex';
+    };
+
+    const closeProjectForm = () => {
+      document.getElementById('project-editor-overlay').style.display = 'none';
+    };
+
+    const renderSubformList = (containerId, items) => {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      
+      items.forEach((item, idx) => {
+        container.insertAdjacentHTML('beforeend', `
+          <div class="dynamic-item">
+            <input type="text" class="form-control list-input" value="${item}">
+            <button class="btn-icon btn-icon-danger" onclick="this.parentElement.remove()">X</button>
+          </div>
+        `);
+      });
+    };
+
+    const addConceptHighlight = () => {
+      document.getElementById('proj-concept-list').insertAdjacentHTML('beforeend', `
+        <div class="dynamic-item">
+          <input type="text" class="form-control list-input" value="">
+          <button class="btn-icon btn-icon-danger" onclick="this.parentElement.remove()">X</button>
+        </div>
+      `);
+    };
+
+    const addCmfHighlight = () => {
+      document.getElementById('proj-cmf-list').insertAdjacentHTML('beforeend', `
+        <div class="dynamic-item">
+          <input type="text" class="form-control list-input" value="">
+          <button class="btn-icon btn-icon-danger" onclick="this.parentElement.remove()">X</button>
+        </div>
+      `);
+    };
+
+    const addGalleryImage = () => {
+      document.getElementById('proj-gallery-list').insertAdjacentHTML('beforeend', `
+        <div class="dynamic-item">
+          <input type="text" class="form-control list-input" value="" placeholder="Caminho da imagem/GIF">
+          <button class="btn-icon btn-icon-danger" onclick="this.parentElement.remove()">X</button>
+        </div>
+      `);
+    };
+
+    // Save project subform changes
+    const saveProjectForm = () => {
+      const title = document.getElementById('proj-title').value.trim();
+      if (!title) {
+        alert("O título do projeto é obrigatório!");
+        return;
+      }
+
+      // Collect list elements values
+      const conceptInputs = document.querySelectorAll('#proj-concept-list .list-input');
+      const conceptHighlights = Array.from(conceptInputs).map(inp => inp.value.trim()).filter(val => val !== '');
+
+      const cmfInputs = document.querySelectorAll('#proj-cmf-list .list-input');
+      const cmfHighlights = Array.from(cmfInputs).map(inp => inp.value.trim()).filter(val => val !== '');
+
+      const galleryInputs = document.querySelectorAll('#proj-gallery-list .list-input');
+      const gallery = Array.from(galleryInputs).map(inp => inp.value.trim()).filter(val => val !== '');
+
+      const newProj = {
+        id: document.getElementById('proj-id').value.trim() || String(projectsDatabase.items.length + 1),
+        title: title,
+        category: document.getElementById('proj-category').value.trim(),
+        client: document.getElementById('proj-client').value.trim(),
+        year: document.getElementById('proj-year').value.trim(),
+        tools: document.getElementById('proj-tools').value.trim(),
+        shortDescription: document.getElementById('proj-short').value.trim(),
+        description: document.getElementById('proj-description').value.trim(),
+        thumbnail: document.getElementById('proj-thumbnail').value.trim(),
+        iframeEmbed: document.getElementById('proj-video').value.trim(),
+        showConceptHighlights: document.getElementById('proj-show-concept').checked,
+        conceptHighlights: conceptHighlights,
+        showCmfHighlights: document.getElementById('proj-show-cmf').checked,
+        cmfHighlights: cmfHighlights,
+        gallery: gallery
+      };
+
+      if (editingProjectId === null) {
+        // Add new project
+        projectsDatabase.items.push(newProj);
+      } else {
+        // Update existing project
+        projectsDatabase.items[editingProjectId] = newProj;
+      }
+
+      renderProjectsManagerList();
+      sendPreviewUpdate();
+      closeProjectForm();
+    };
+
+    // ==========================================
+    // 7. PUBLICADORES & PERSISTÊNCIA (Git Gateway)
+    // ==========================================
+    const saveChanges = () => {
+      if (offlineMode) {
+        showStatusError("Você está operando no Modo Offline. Não é possível fazer o deploy direto. Utilize o botão 'Baixar Arquivos JSON' e substitua-os em sua pasta 'content/' manualmente.");
+        return;
+      }
+
+      const user = typeof netlifyIdentity !== 'undefined' ? netlifyIdentity.currentUser() : null;
+      if (!user) {
+        alert("Usuário não autenticado. Por favor, faça login.");
+        return;
+      }
+
+      showLoader("Publicando alterações no site ativo...");
+      const token = user.token.access_token;
+      
+      const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      };
+
+      // Ensure data is synced before pushing
+      updateGlobalSettings();
+
+      // Encode JSON datasets in Base64
+      // We use clean Unicode encoder to prevent weird Latin character accents conversion errors
+      const utf8Btoa = (str) => {
+        return btoa(unescape(encodeURIComponent(str)));
+      };
+
+      const settingsString = JSON.stringify(globalSettings, null, 2);
+      const projectsString = JSON.stringify(projectsDatabase, null, 2);
+
+      const settingsPayload = {
+        message: "Visual Studio: Configurações e Estilos Atualizados",
+        content: utf8Btoa(settingsString),
+        sha: gitShaSettings,
+        branch: "main"
+      };
+
+      const projectsPayload = {
+        message: "Visual Studio: Banco de Dados de Projetos Atualizado",
+        content: utf8Btoa(projectsString),
+        sha: gitShaProjects,
+        branch: "main"
+      };
+
+      // Chain Git gateway commits: Settings first, then Projects
+      fetch('/.netlify/git/github/contents/content/settings.json', {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify(settingsPayload)
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("Erro ao salvar settings.json");
+        return res.json();
+      })
+      .then(data => {
+        // Update locally stored settings Git SHA
+        gitShaSettings = data.commit.sha;
+        
+        // Push projects JSON
+        return fetch('/.netlify/git/github/contents/content/projects.json', {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify(projectsPayload)
+        });
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("Erro ao salvar projects.json");
+        return res.json();
+      })
+      .then(data => {
+        gitShaProjects = data.commit.sha;
+        showStatusSuccess("Alterações publicadas com sucesso! Seu portfólio está sendo reconstruído pelo servidor do Netlify.");
+      })
+      .catch(err => {
+        console.error("Publishing failed:", err);
+        showStatusError("Falha na publicação: " + err.message + ". Suas alterações foram retidas no painel local; você pode exportá-las como JSON backup.");
+      });
+    };
+
+    // JSON file download fallback
+    const downloadJSONBackup = () => {
+      // Refresh configurations state
+      updateGlobalSettings();
+
+      const downloadFile = (filename, content) => {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(content));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      };
+
+      // Trigger downloads
+      downloadFile("settings.json", JSON.stringify(globalSettings, null, 2));
+      setTimeout(() => {
+        downloadFile("projects.json", JSON.stringify(projectsDatabase, null, 2));
+      }, 500);
+    };
+
+    // ==========================================
+    // 8. LOADER OVERLAYS & CONTROLLERS
+    // ==========================================
+    const showLoader = (text) => {
+      document.getElementById('status-loader').style.display = 'block';
+      document.getElementById('btn-status-ok').style.display = 'none';
+      document.getElementById('status-text').textContent = text;
+      document.getElementById('status-overlay').style.display = 'flex';
+    };
+
+    const hideLoader = () => {
+      document.getElementById('status-overlay').style.display = 'none';
+    };
+
+    const showStatusError = (text) => {
+      document.getElementById('status-loader').style.display = 'none';
+      document.getElementById('btn-status-ok').style.display = 'block';
+      document.getElementById('status-text').innerHTML = `<span style="color: #ef4444; font-weight:700;">AVISO</span><br><br>${text}`;
+      document.getElementById('status-overlay').style.display = 'flex';
+    };
+
+    const showStatusSuccess = (text) => {
+      document.getElementById('status-loader').style.display = 'none';
+      document.getElementById('btn-status-ok').style.display = 'block';
+      document.getElementById('status-text').innerHTML = `<span style="color: #10b981; font-weight:700;">SUCESSO</span><br><br>${text}`;
+      document.getElementById('status-overlay').style.display = 'flex';
+    };
+
+    const closeStatusOverlay = () => {
+      document.getElementById('status-overlay').style.display = 'none';
+    };
   </script>
 </body>
 </html>
