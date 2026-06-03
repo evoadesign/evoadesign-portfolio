@@ -802,7 +802,17 @@
       <div class="login-subtitle">Studio Builder</div>
       <p class="login-desc">Entre com sua conta Netlify para acessar o editor em tempo real e publicar alterações no site.</p>
       
-      <button class="login-btn" id="btn-login-identity">Fazer Login</button>
+      <div id="login-form-fields" style="text-align: left; margin-bottom: 24px;">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label class="form-label" for="login-email" style="font-size: 11px; margin-bottom: 6px;">E-mail</label>
+          <input type="email" id="login-email" class="form-control" placeholder="ex: seu-nome@exemplo.com" style="background-color: rgba(22, 25, 31, 0.8);">
+        </div>
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label class="form-label" for="login-password" style="font-size: 11px; margin-bottom: 6px;">Senha</label>
+          <input type="password" id="login-password" class="form-control" placeholder="••••••••" style="background-color: rgba(22, 25, 31, 0.8);">
+        </div>
+        <button class="login-btn" id="btn-login-submit" style="margin-bottom: 0;">Acessar Painel</button>
+      </div>
       <button class="login-btn login-btn-offline" id="btn-login-offline">Trabalhar Offline</button>
       
       <div style="font-size: 9px; color: var(--color-text-muted); margin-top: 24px; letter-spacing: 1px; text-transform: uppercase;">Build 2026.06.01.06 (Meta Tag Link)</div>
@@ -1352,80 +1362,96 @@
     // 1. INITIALIZATION & AUTHENTICATION (Netlify Identity)
     // ==========================================
     const initializeBuilder = () => {
-      const hasIdentity = typeof netlifyIdentity !== 'undefined';
-
-      if (hasIdentity) {
+      // 1. Check for saved login session to auto-login
+      const savedUser = localStorage.getItem('evoa_admin_user');
+      if (savedUser) {
         try {
-          // Always initialize with the production Netlify subdomain's Identity API URL
+          const user = JSON.parse(savedUser);
+          handleUserLogin(user);
+        } catch (e) {
+          localStorage.removeItem('evoa_admin_user');
+        }
+      }
+
+      // Initialize netlifyIdentity if loaded, just in case (e.g. for checking features)
+      if (typeof netlifyIdentity !== 'undefined') {
+        try {
           netlifyIdentity.init({
             APIUrl: 'https://evoadesign.netlify.app/.netlify/identity'
           });
-
-          // Check current user state
-          const user = netlifyIdentity.currentUser();
-          if (user) {
-            handleUserLogin(user);
-          } else {
-            // Safe check for offline localhost development
-            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-              console.log("Studio Builder: Local development environment detected.");
-            }
-          }
-
-          // Netlify Identity triggers
-          netlifyIdentity.on('login', user => {
-            netlifyIdentity.close();
-            handleUserLogin(user);
-          });
-
-          netlifyIdentity.on('logout', () => {
-            window.location.reload();
-          });
         } catch (e) {
-          console.error("Erro na inicialização do Netlify Identity:", e);
-          const banner = document.getElementById('global-error-banner');
-          if (banner) {
-            banner.style.display = 'block';
-            banner.innerHTML = `<strong>Falha na Inicialização do Netlify:</strong><br>${e.message}`;
-          }
+          console.warn("Netlify Identity failed to initialize:", e);
         }
-      } else {
-        console.warn("Netlify Identity widget não foi carregado. Operando em modo de fallback offline.");
       }
 
-      // Hook up UI Login Buttons
-      const btnLoginIdentity = document.getElementById('btn-login-identity');
-      if (btnLoginIdentity) {
-        btnLoginIdentity.addEventListener('click', () => {
-          if (typeof netlifyIdentity !== 'undefined') {
-            try {
-              btnLoginIdentity.textContent = "Conectando...";
-              netlifyIdentity.open();
-              setTimeout(() => {
-                btnLoginIdentity.textContent = "Fazer Login";
-              }, 4000);
-            } catch (e) {
-              alert("Erro ao abrir a janela de login do Netlify: " + e.message);
-              btnLoginIdentity.textContent = "Fazer Login";
-            }
-          } else {
-            alert("O serviço de autenticação do Netlify não pôde ser carregado.\n\nProváveis causas:\n1. Falha de conexão com a internet.\n2. Uso de bloqueadores de anúncios/scripts no navegador.\n3. Acesso direto por arquivo local (file://). Certifique-se de servir a página sob um domínio HTTP/HTTPS.\n\nPor favor, recarregue a página.");
+      // 2. Direct custom form login handler
+      const btnLoginSubmit = document.getElementById('btn-login-submit');
+      if (btnLoginSubmit) {
+        btnLoginSubmit.addEventListener('click', () => {
+          const email = document.getElementById('login-email').value;
+          const password = document.getElementById('login-password').value;
+
+          if (!email || !password) {
+            alert("Por favor, preencha todos os campos.");
+            return;
           }
+
+          btnLoginSubmit.textContent = "Autenticando...";
+          btnLoginSubmit.disabled = true;
+
+          const params = new URLSearchParams();
+          params.append('grant_type', 'password');
+          params.append('username', email);
+          params.append('password', password);
+
+          fetch('https://evoadesign.netlify.app/.netlify/identity/token', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params.toString()
+          })
+          .then(res => {
+            if (!res.ok) {
+              return res.json().then(err => {
+                throw new Error(err.error_description || "E-mail ou senha incorretos.");
+              });
+            }
+            return res.json();
+          })
+          .then(data => {
+            btnLoginSubmit.textContent = "Acessar Painel";
+            btnLoginSubmit.disabled = false;
+
+            // Map standard GoTrue API response to the format expected by the app
+            const user = {
+              email: data.user.email,
+              user_metadata: data.user.user_metadata || {},
+              token: {
+                access_token: data.access_token
+              }
+            };
+
+            // Save session
+            localStorage.setItem('evoa_admin_user', JSON.stringify(user));
+
+            handleUserLogin(user);
+          })
+          .catch(e => {
+            alert("Falha no login: " + e.message);
+            btnLoginSubmit.textContent = "Acessar Painel";
+            btnLoginSubmit.disabled = false;
+          });
         });
       }
 
-      // Hide "Trabalhar Offline" button on production for absolute security
+      // 3. Offline Mode Login handler
       const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "";
       const btnLoginOffline = document.getElementById('btn-login-offline');
       if (btnLoginOffline) {
         if (isLocal) {
           btnLoginOffline.style.display = 'block';
           btnLoginOffline.addEventListener('click', () => {
-            if (typeof netlifyIdentity !== 'undefined') {
-              try {
-                netlifyIdentity.close();
-              } catch (e) {}
-            }
             offlineMode = true;
             document.getElementById('login-screen').style.opacity = '0';
             setTimeout(() => {
@@ -1464,6 +1490,7 @@
     };
 
     const logoutUser = () => {
+      localStorage.removeItem('evoa_admin_user');
       if (typeof netlifyIdentity !== 'undefined' && netlifyIdentity.currentUser()) {
         netlifyIdentity.logout();
       } else {
