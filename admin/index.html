@@ -1420,22 +1420,41 @@
             return res.json();
           })
           .then(data => {
-            btnLoginSubmit.textContent = "Acessar Painel";
-            btnLoginSubmit.disabled = false;
+            const token = data.access_token;
+            if (!token) {
+              throw new Error("Token de acesso não recebido.");
+            }
 
-            // Map standard GoTrue API response to the format expected by the app
-            const user = {
-              email: data.user.email,
-              user_metadata: data.user.user_metadata || {},
-              token: {
-                access_token: data.access_token
+            // Fetch user profile metadata from Netlify Identity using token
+            return fetch('https://evoadesign.netlify.app/.netlify/identity/user', {
+              headers: {
+                'Authorization': `Bearer ${token}`
               }
-            };
+            })
+            .then(userRes => {
+              if (!userRes.ok) {
+                throw new Error("Não foi possível obter dados do perfil do usuário.");
+              }
+              return userRes.json();
+            })
+            .then(userData => {
+              btnLoginSubmit.textContent = "Acessar Painel";
+              btnLoginSubmit.disabled = false;
 
-            // Save session
-            localStorage.setItem('evoa_admin_user', JSON.stringify(user));
+              // Map standard GoTrue API response to the format expected by the app
+              const user = {
+                email: userData.email,
+                user_metadata: userData.user_metadata || {},
+                token: {
+                  access_token: token
+                }
+              };
 
-            handleUserLogin(user);
+              // Save session
+              localStorage.setItem('evoa_admin_user', JSON.stringify(user));
+
+              handleUserLogin(user);
+            });
           })
           .catch(e => {
             alert("Falha no login: " + e.message);
@@ -2297,7 +2316,18 @@
         return;
       }
 
-      const user = typeof netlifyIdentity !== 'undefined' ? netlifyIdentity.currentUser() : null;
+      let user = null;
+      const savedUser = localStorage.getItem('evoa_admin_user');
+      if (savedUser) {
+        try {
+          user = JSON.parse(savedUser);
+        } catch (e) {
+          localStorage.removeItem('evoa_admin_user');
+        }
+      }
+      if (!user && typeof netlifyIdentity !== 'undefined') {
+        user = netlifyIdentity.currentUser();
+      }
       if (!user) {
         alert("Usuário não autenticado. Por favor, faça login.");
         return;
