@@ -798,8 +798,10 @@
   <div id="login-screen">
     <div id="global-error-banner" style="display: none; background: rgba(239, 68, 68, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 16px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; max-width: 440px; width: 100%; text-align: left; line-height: 1.5; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);"></div>
     <div class="login-card">
-      <h1 class="login-logo">EVOA<span>.</span></h1>
-      <div class="login-subtitle">Studio Builder</div>
+      <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; gap: 10px;">
+        <img src="../assets/images/EVOA-LOGO-BRANCO.png" alt="evoadesign" style="height: 64px; width: auto; object-fit: contain;">
+        <div class="login-subtitle" style="margin-bottom: 0; font-size: 12px; font-weight: 800; color: var(--color-primary); text-shadow: var(--shadow-neon); letter-spacing: 2px;">STUDIO BUILDER</div>
+      </div>
       <p class="login-desc">Entre com sua conta Netlify para acessar o editor em tempo real e publicar alterações no site.</p>
       
       <div id="login-form-fields" style="text-align: left; margin-bottom: 24px;">
@@ -825,9 +827,11 @@
     <div class="sidebar">
       
       <div class="sidebar-header">
-        <div class="sidebar-brand">
-          <div class="brand-title">EVOA<span>.</span></div>
-          <div class="brand-subtitle">Studio Builder</div>
+        <div class="sidebar-brand" style="flex-direction: row; align-items: center; gap: 12px; width: 100%;">
+          <img src="../assets/images/EVOA-LOGO-BRANCO.png" alt="evoadesign" style="height: 42px; width: auto; object-fit: contain;">
+          <div style="display: flex; flex-direction: column;">
+            <span style="font-size: 8px; font-weight: 800; letter-spacing: 1px; color: var(--color-primary); text-shadow: var(--shadow-neon); text-transform: uppercase;">Studio Builder</span>
+          </div>
         </div>
       </div>
 
