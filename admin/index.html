@@ -1356,9 +1356,9 @@
 
       if (hasIdentity) {
         try {
-          // Always initialize with the production custom domain's Identity API URL
+          // Always initialize with the production Netlify subdomain's Identity API URL
           netlifyIdentity.init({
-            APIUrl: 'https://evoadesign.com.br/.netlify/identity'
+            APIUrl: 'https://evoadesign.netlify.app/.netlify/identity'
           });
 
           // Check current user state
