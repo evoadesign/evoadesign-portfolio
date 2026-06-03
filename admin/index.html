@@ -1356,16 +1356,10 @@
 
       if (hasIdentity) {
         try {
-          const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "";
-          if (isLocal) {
-            netlifyIdentity.init({
-              APIUrl: 'https://evoadesign.com.br/.netlify/identity'
-            });
-          } else {
-            // Remove cached site URL to force auto-detection of the current domain
-            localStorage.removeItem('netlifySiteURL');
-            netlifyIdentity.init();
-          }
+          // Always initialize with the production custom domain's Identity API URL
+          netlifyIdentity.init({
+            APIUrl: 'https://evoadesign.com.br/.netlify/identity'
+          });
 
           // Check current user state
           const user = netlifyIdentity.currentUser();
